@@ -1,0 +1,55 @@
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+}
+
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    width: auto;
+    border: 1px solid blue;
+    border-radius: 50%;
+    padding: 20px; 
+    min-width: 400px;
+}
+
+.textAlignCenter {
+    text-align: center;
+}
+
+.prevButton {
+    float: left;
+    height: 10%;
+    margin-top: calc(50% - 10%);
+}
+
+.nextButton {
+    float: right;
+    height: 10%;
+    margin-top: calc(50% - 10%);
+}
+
+.timerCircle {
+    padding: 20%;
+    /* min-width: 100px; */
+    /* min-height: 100px; */
+    min-width: 100px;
+    border: 1px solid blue;
+    border-radius: 50%;
+}

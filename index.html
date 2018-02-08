@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+ <head>
+  <meta charset="utf-8">
+  <title>ITchallenge</title>
+    <script crossorigin src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="styles/playerControl.css">
+
+    <script src="src/player.js"></script>
+ </head>
+  <body onload="initial()">
+
+    <div class="flex center">
+      <div class="row">
+
+          <div id="player-control" class="textAlignCenter">
+              <button>
+                  list of tracks
+                </button>
+          
+                <button class="prevButton">
+                    prev
+                </button>
+
+                <button class="nextButton">
+                    next
+                </button>
+          
+                <div class="flex center timerCircle">
+                  <div>
+                    <h2>time</h2>
+                    <h2>name of composition</h2>
+                  </div>
+                </div>
+          
+                <button>
+                    pause_play
+                </button>
+          </div>
+        
+          <div id="track-list">
+      
+          </div >
+
+      </div>
+    </div>
+   </body>
+</html>
+
