@@ -48,7 +48,7 @@ body {
     margin-left: calc(160px - 10px);
 }
 
-/* 140 - radius of circle */
+/* 160 - radius of circle */
 .listOfTracksButton {
     position: absolute;
     margin-top: calc(-160px + 10px);

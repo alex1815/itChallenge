@@ -1,14 +1,28 @@
+let audio;
+const listOfMusic = [
+    "./assets/music/chopin-mazurka-in-d-major-b4.mp3",
+    "./assets/music/chopin-mazurka-in-d-major-b71.mp3",
+    "./assets/music/chopin-spring.mp3",
+    "./assets/music/chopin-tarantelle-op43.mp3",
+];
+
+let indexOfcurrentTrack;
+
  function initial()
 {
     const timerRadius = 140;
     const aroundCircleRadius = 180;
-
-    let audio = new Audio("./assets/music/chopin-mazurka-in-d-major-b4.mp3");
-    //audio.play();
    
     drawCircleWithMoving("canvasCircleTimer", timerRadius, 120, 20);
     drawCircle("canvasCircleAround", aroundCircleRadius);
     drawCircle("canvasCircleUnderTimer", timerRadius);
+
+    addListiners();
+
+    audio = document.getElementById("audio");
+    indexOfcurrentTrack = 0;
+    audio.src = listOfMusic[indexOfcurrentTrack];
+    audio.play();
 }
 
 function drawCircleWithMoving(id, radius, durationOfMusic, currentPosition)
@@ -43,4 +57,54 @@ function preapareCanvas(id, radius)
     c.width = size;
     c.height = size;
     return { ctx: c.getContext("2d"), size };
+}
+
+function onPausePlay(event)
+{
+    audio.paused
+     ? audio.play()
+     : audio.pause();
+}
+
+function onNextTrack()
+{
+    indexOfcurrentTrack = indexOfcurrentTrack === listOfMusic.length - 1
+        ? 0
+        : ++indexOfcurrentTrack;
+
+    setTrack(indexOfcurrentTrack);
+}
+
+function onPrevTrack()
+{
+    indexOfcurrentTrack = indexOfcurrentTrack === 0
+    ? listOfMusic.length - 1
+    : --indexOfcurrentTrack;
+
+    setTrack(indexOfcurrentTrack);
+}
+
+function setTrack(indexOfTrack)
+{
+    audio.src = listOfMusic[indexOfcurrentTrack];
+    audio.play();
+}
+
+function onlistOfTracks()
+{
+
+}
+
+function addListiners()
+{
+    addListiner("pausePlay", onPausePlay);
+    addListiner("listOfTracksButton", onlistOfTracks);
+    addListiner("nextButton", onNextTrack);
+    addListiner("prevButton", onPrevTrack);
+}
+
+function addListiner(id, callback)
+{
+    const element = document.getElementsByClassName(id)[0];
+    element.addEventListener("click", callback);
 }
