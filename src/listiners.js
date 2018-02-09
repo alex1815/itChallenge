@@ -32,8 +32,27 @@ function onPrevTrack()
 
 function setTrack(indexOfTrack)
 {
+    const defaultTime = "00:00";
     audio.src = listOfMusic[indexOfcurrentTrack];
+    document.getElementById("nameOfComposition").innerText = nameOfTracks[indexOfcurrentTrack];
+    document.getElementById("timeOfTrack").innerText = defaultTime;
     drawTimeCircle(audio.duration);
+
+    clearInterval(this.timeTimer);
+    this.timeTimer = setInterval(() => {
+        const minutes = Math.floor(audio.currentTime / 60);
+        const seconds = Math.ceil(audio.currentTime % 60);
+
+        const minutesStr = minutes >= 10
+            ? minutes
+            : "0" + minutes;
+
+        const secondsStr = seconds >= 10
+            ? seconds
+            : "0" + seconds;
+
+        document.getElementById("timeOfTrack").innerText = `${minutesStr}:${secondsStr}`;
+    }, 1000);
 }
 
 function onlistOfTracks()

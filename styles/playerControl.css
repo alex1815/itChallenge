@@ -65,3 +65,11 @@ body {
     height: auto;
     width: auto;
 }
+
+.timeOfTrack {
+    font-size: 3em;
+}
+
+.nameOfComposition {
+    max-width: 200px;
+}

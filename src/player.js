@@ -6,6 +6,14 @@ const listOfMusic = [
     "./assets/music/chopin-tarantelle-op43.mp3",
 ];
 
+const nameOfTracks = [
+    "Mazurka in D major, B. 4",
+    // "Mazurka in D major, B. 4 dddddddddddddd",
+    "Mazurka in D major, B. 71",
+    "Andantino 'Spring', B. 117",
+    "Tarantelle, Op. 43",
+];
+
 const timerRadius = 180;
 const innerCircleRadius = 140;
 
@@ -15,7 +23,7 @@ let indexOfcurrentTrack;
 {
     audio = document.getElementById("audio");
     indexOfcurrentTrack = 0;
-    audio.src = listOfMusic[indexOfcurrentTrack];
+    setTrack(indexOfcurrentTrack);
     audio.autoplay = true;
     // audio.autoplay = false;
    
