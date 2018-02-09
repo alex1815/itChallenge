@@ -6,36 +6,31 @@ const listOfMusic = [
     "./assets/music/chopin-tarantelle-op43.mp3",
 ];
 
+const timerRadius = 140;
+
 let indexOfcurrentTrack;
 
  function initial()
 {
-    const timerRadius = 140;
     const aroundCircleRadius = 180;
-   
-    drawCircleWithMoving("canvasCircleTimer", timerRadius, 120, 20);
-    drawCircle("canvasCircleAround", aroundCircleRadius);
-    drawCircle("canvasCircleUnderTimer", timerRadius);
-
-    addListiners();
 
     audio = document.getElementById("audio");
     indexOfcurrentTrack = 0;
     audio.src = listOfMusic[indexOfcurrentTrack];
-    audio.play();
+    audio.autoplay = true;
+   
+    drawCircle("canvasCircleAround", aroundCircleRadius);
+    drawCircle("canvasCircleUnderTimer", timerRadius);
+
+    addListiners();
 }
 
-function drawCircleWithMoving(id, radius, durationOfMusic, currentPosition)
+function drawCircleWithMoving(ctx, size, radius, durationOfMusic, currentPosition)
 {
-    const { ctx, size } = preapareCanvas(id, radius);
-
-    setInterval(() => {
-        ctx.strokeStyle ="black";
-        ctx.beginPath();
-        ctx.arc(size/2, size/2, radius, -Math.PI/2, 2 * Math.PI * (currentPosition/durationOfMusic));
-        ctx.stroke();
-        currentPosition++;
-    }, 1000);
+    ctx.strokeStyle ="red";
+    ctx.beginPath();
+    ctx.arc(size/2, size/2, radius, -Math.PI/2, 2 * Math.PI * (currentPosition/durationOfMusic) - Math.PI/2);
+    ctx.stroke();
 }
 
 function drawCircle(id, radius)
@@ -53,58 +48,49 @@ function preapareCanvas(id, radius)
     const marginOfButtons = 10;
     const sizeOfButtons = 20; 
     const size = radius * 2 + sizeOfButtons + marginOfButtons;
-    const c = document.getElementById(id);
-    c.width = size;
-    c.height = size;
-    return { ctx: c.getContext("2d"), size };
+    const element = document.getElementById(id);
+    element.width = size;
+    element.height = size;
+    return { ctx: element.getContext("2d"), size, element };
 }
 
-function onPausePlay(event)
+function drawTimeCircle(duration, currentPostion, onPause)
 {
-    audio.paused
-     ? audio.play()
-     : audio.pause();
+    if (!this.ctx)
+    {
+        const { ctx, size, element } = preapareCanvas("canvasCircleTimer", timerRadius);
+        this.ctx = ctx;
+        this.size = size;
+        this.element = element;
+    }
+
+    this.ctx.clearRect(0, 0, element.width, element.height);
+
+    drawTimeCircleByContext(this.ctx, this.size, duration, timerRadius, currentPostion, onPause);
 }
 
-function onNextTrack()
+function drawTimeCircleByContext(ctx, size, duration, radius, currentPostion = 0, onPause = false)
 {
-    indexOfcurrentTrack = indexOfcurrentTrack === listOfMusic.length - 1
-        ? 0
-        : ++indexOfcurrentTrack;
+    if (this.intervalId)
+    {
+        clearInterval(this.intervalId);
+    }
 
-    setTrack(indexOfcurrentTrack);
-}
+    if (onPause)
+    {
+        drawCircleWithMoving(this.ctx, this.size, radius, duration, currentPostion);
+    }
+    else
+    {
+        const func = () =>
+        {
+            drawCircleWithMoving(this.ctx, this.size, radius, duration, currentPostion);
+            currentPostion++;;
+        }
 
-function onPrevTrack()
-{
-    indexOfcurrentTrack = indexOfcurrentTrack === 0
-    ? listOfMusic.length - 1
-    : --indexOfcurrentTrack;
-
-    setTrack(indexOfcurrentTrack);
-}
-
-function setTrack(indexOfTrack)
-{
-    audio.src = listOfMusic[indexOfcurrentTrack];
-    audio.play();
-}
-
-function onlistOfTracks()
-{
-
-}
-
-function addListiners()
-{
-    addListiner("pausePlay", onPausePlay);
-    addListiner("listOfTracksButton", onlistOfTracks);
-    addListiner("nextButton", onNextTrack);
-    addListiner("prevButton", onPrevTrack);
-}
-
-function addListiner(id, callback)
-{
-    const element = document.getElementsByClassName(id)[0];
-    element.addEventListener("click", callback);
+        func();
+        this.intervalId = setInterval(() => {
+            func();
+        }, 1000);
+    }
 }
