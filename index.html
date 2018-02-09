@@ -10,11 +10,16 @@
  </head>
   <body onload="initial()">
 
-    <div class="flex center">
-      <div class="row">
+    <div id="player-control" class="playerControlBlock">
+      
+        <div class="flex center border">
+          <!-- <div class="row"> -->
+              <canvas id="canvasCircleTimer" class="timerCircle" width="300px" height="300px"></canvas>
+              <canvas id="canvasCircleAround" class="timerCircle"></canvas>
+              <canvas id="canvasCircleUnderTimer" class="timerCircle" width="300px" height="300px"></canvas>
+  
 
-          <div id="player-control" class="textAlignCenter">
-              <button>
+              <button class="listOfTracksButton">
                   list of tracks
                 </button>
           
@@ -26,17 +31,17 @@
                     next
                 </button>
           
-                <div class="flex center timerCircle">
+                <div class="textAlignCenter">                  
                   <div>
-                    <h2>time</h2>
-                    <h2>name of composition</h2>
-                  </div>
-                </div>
+                      <h2>time</h2>
+                      <h2>name of composition</h2>
+                    </div>
+                </div>              
           
-                <button>
+                <button class="pausePlay">
                     pause_play
                 </button>
-          </div>
+          <!-- </div> -->
         
           <div id="track-list">
       
