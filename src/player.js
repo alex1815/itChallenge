@@ -6,31 +6,23 @@ const listOfMusic = [
     "./assets/music/chopin-tarantelle-op43.mp3",
 ];
 
-const timerRadius = 140;
+const timerRadius = 180;
+const innerCircleRadius = 140;
 
 let indexOfcurrentTrack;
 
  function initial()
 {
-    const aroundCircleRadius = 180;
-
     audio = document.getElementById("audio");
     indexOfcurrentTrack = 0;
     audio.src = listOfMusic[indexOfcurrentTrack];
     audio.autoplay = true;
+    // audio.autoplay = false;
    
-    drawCircle("canvasCircleAround", aroundCircleRadius);
+    drawCircle("canvasInnerCircle", innerCircleRadius);
     drawCircle("canvasCircleUnderTimer", timerRadius);
 
     addListiners();
-}
-
-function drawCircleWithMoving(ctx, size, radius, durationOfMusic, currentPosition)
-{
-    ctx.strokeStyle ="red";
-    ctx.beginPath();
-    ctx.arc(size/2, size/2, radius, -Math.PI/2, 2 * Math.PI * (currentPosition/durationOfMusic) - Math.PI/2);
-    ctx.stroke();
 }
 
 function drawCircle(id, radius)
@@ -41,17 +33,6 @@ function drawCircle(id, radius)
     ctx.beginPath();
     ctx.arc(size/2, size/2, radius, 0, 2 * Math.PI);
     ctx.stroke();
-}
-
-function preapareCanvas(id, radius)
-{
-    const marginOfButtons = 10;
-    const sizeOfButtons = 20; 
-    const size = radius * 2 + sizeOfButtons + marginOfButtons;
-    const element = document.getElementById(id);
-    element.width = size;
-    element.height = size;
-    return { ctx: element.getContext("2d"), size, element };
 }
 
 function drawTimeCircle(duration, currentPostion, onPause)
@@ -93,4 +74,23 @@ function drawTimeCircleByContext(ctx, size, duration, radius, currentPostion = 0
             func();
         }, 1000);
     }
+}
+
+function drawCircleWithMoving(ctx, size, radius, durationOfMusic, currentPosition)
+{
+    ctx.strokeStyle ="red";
+    ctx.beginPath();
+    ctx.arc(size/2, size/2, radius, -Math.PI/2, 2 * Math.PI * (currentPosition/durationOfMusic) - Math.PI/2);
+    ctx.stroke();
+}
+
+function preapareCanvas(id, radius)
+{
+    const marginOfButtons = 10;
+    const sizeOfButtons = 20; 
+    const size = radius * 2 + sizeOfButtons + marginOfButtons;
+    const element = document.getElementById(id);
+    element.width = size;
+    element.height = size;
+    return { ctx: element.getContext("2d"), size, element };
 }
