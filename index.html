@@ -13,23 +13,36 @@
     <div id="player-control" class="playerControlBlock">
       
         <div class="flex center border">
-          <!-- <div class="row"> -->
               <canvas id="canvasCircleTimer" class="timerCircle" width="300px" height="300px"></canvas>
               <canvas id="canvasCircleAround" class="timerCircle"></canvas>
               <canvas id="canvasCircleUnderTimer" class="timerCircle" width="300px" height="300px"></canvas>
   
+              <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="26px" height="20px" viewBox="0 0 26 20" enable-background="new 0 0 26 20" xml:space="preserve"  class="listOfTracksButton">
+                <g>
+                  <rect x="11" y="-11" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 15 -11)" width="4" height="26"/>
+                  <rect x="11" y="-3" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 23 -3)" width="4" height="26"/>
+                  <rect x="11" y="5" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 31 5)" width="4" height="26"/>
+                </g>
+              </svg>
 
-              <button class="listOfTracksButton">
-                  list of tracks
-                </button>
-          
-                <button class="prevButton">
-                    prev
-                </button>
+                <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    width="36px" height="18px" viewBox="0 0 36 18" enable-background="new 0 0 36 18" xml:space="preserve" class="prevButton">
+                  <g>
+                    <polygon points="36,17 18,9 36,1 	"/>
+                    <polygon points="20,17 2,9 20,1 	"/>
+                    <rect x="0" y="0" transform="matrix(-1 -4.502011e-11 4.502011e-11 -1 4 18)" width="4" height="18"/>
+                  </g>
+                </svg>
 
-                <button class="nextButton">
-                    next
-                </button>
+                <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    width="36px" height="18px" viewBox="0 0 36 18" enable-background="new 0 0 36 18" xml:space="preserve" class="nextButton">
+                  <g>
+                    <polygon points="0,17 18,9 0,1 	"/>
+                    <polygon points="16,17 34,9 16,1 	"/>
+                    <rect x="32" width="4" height="18"/>
+                  </g>
+                </svg>
           
                 <div class="textAlignCenter">                  
                   <div>
@@ -38,17 +51,22 @@
                     </div>
                 </div>              
           
-                <button class="pausePlay">
-                    pause_play
-                </button>
-          <!-- </div> -->
-        
-          <div id="track-list">
-      
-          </div >
 
+                <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="38px" height="18px" viewBox="0 0 38 18" enable-background="new 0 0 38 18" xml:space="preserve" class="pausePlay">
+                <g>
+                  <polygon points="0,17 18,9 0,1 	"/>
+                  <rect x="26" width="4" height="18"/>
+                  <rect x="34" width="4" height="18"/>
+                </g>
+                </svg>
       </div>
     </div>
+
+    <div id="track-list">
+      
+      </div >
+
    </body>
 </html>
 
