@@ -12,36 +12,36 @@ function onPausePlay(event)
     }
 }
 
-function onNextTrack(newindexOfTrack)
+function onNextTrack(newIdOfTrack)
 {
-    indexOfcurrentTrack = 
-        newindexOfTrack !== undefined
-        ? newindexOfTrack
-        : indexOfcurrentTrack === listOfMusic.length - 1
+    const newidOfcurrentTrack = 
+        newIdOfTrack !== undefined
+        ? newIdOfTrack
+        : idOfcurrentTrack === getAllTracks().length - 1
             ? 0
-            : ++indexOfcurrentTrack;
+            : ++idOfcurrentTrack;
 
-    setTrack(indexOfcurrentTrack);
+    setTrack(newidOfcurrentTrack);
 }
 
-function onPrevTrack(newindexOfTrack)
+function onPrevTrack(newIdOfTrack)
 {
-    indexOfcurrentTrack = 
-        newindexOfTrack  !== undefined
-        ? newindexOfTrack
-        : indexOfcurrentTrack === 0
-            ? listOfMusic.length - 1
-            : --indexOfcurrentTrack;
+    const newidOfcurrentTrack = 
+        newIdOfTrack  !== undefined
+        ? newIdOfTrack
+        : idOfcurrentTrack === 0
+            ? getAllTracks().length - 1
+            : --idOfcurrentTrack;
 
-    setTrack(indexOfcurrentTrack);
+    setTrack(newidOfcurrentTrack);
 }
 
-function setTrack(indexOfTrack)
+function setTrack(idOfTrack)
 {
     const defaultTime = "00:00";
-    indexOfcurrentTrack = indexOfTrack;
-    audio.src = listOfMusic[indexOfcurrentTrack];
-    document.getElementById("nameOfComposition").innerText = nameOfTracks[indexOfcurrentTrack];
+    idOfcurrentTrack = idOfTrack;
+    audio.src = findTrackPathById(idOfcurrentTrack);
+    document.getElementById("nameOfComposition").innerText = findTrackNameById(idOfcurrentTrack);
     document.getElementById("timeOfTrack").innerText = defaultTime;
     drawTimeCircle(audio.duration);
 
@@ -82,11 +82,11 @@ function toggleMainScreen()
     list.style.display = currentState; 
 }
 
-function clickOnTrack(indexOfTrack)
+function clickOnTrack(idOfTrack)
 {
-    indexOfcurrentTrack < indexOfTrack
-    ? onPrevTrack(indexOfTrack)
-    : onNextTrack(indexOfTrack);
+    idOfcurrentTrack < idOfTrack
+    ? onPrevTrack(idOfTrack)
+    : onNextTrack(idOfTrack);
 }
 
 function onAudioEnd()
@@ -104,7 +104,7 @@ function addListiners()
     audio.onended = onAudioEnd;
     audio.oncanplaythrough = () => { drawTimeCircle(audio.duration) };
 
-    for (let i = 0; i < listOfMusic.length; i++)
+    for (let i = 0; i < getAllTracks().length; i++)
     {
         addListiner("itemOfList-" + i, () => { clickOnTrack(i) });
     }

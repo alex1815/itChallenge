@@ -1,29 +1,15 @@
 let audio;
-const listOfMusic = [
-    "./assets/music/chopin-mazurka-in-d-major-b4.mp3",
-    "./assets/music/chopin-mazurka-in-d-major-b71.mp3",
-    "./assets/music/chopin-spring.mp3",
-    "./assets/music/chopin-tarantelle-op43.mp3",
-];
-
-const nameOfTracks = [
-    "Mazurka in D major, B. 4",
-    // "Mazurka in D major, B. 4 dddddddddddddd",
-    "Mazurka in D major, B. 71",
-    "Andantino 'Spring', B. 117",
-    "Tarantelle, Op. 43",
-];
 
 const timerRadius = 180;
 const innerCircleRadius = 125;
 
-let indexOfcurrentTrack;
+let idOfcurrentTrack;
 
  function initial()
 {
     audio = document.getElementById("audio");
-    indexOfcurrentTrack = 0;
-    setTrack(indexOfcurrentTrack);
+    idOfcurrentTrack = getAllTracks()[0].id;
+    setTrack(idOfcurrentTrack);
     audio.autoplay = false;
     // TODO back to true
     audio.autoplay = true;
