@@ -99,6 +99,7 @@ function setTrack(idOfTrack)
     audio.src = findTrackPathById(idOfcurrentTrack);
     document.getElementById("nameOfComposition").innerText = findTrackNameById(idOfcurrentTrack);
     document.getElementById("timeOfTrack").innerText = defaultTime;
+    document.getElementById("authorOfComposition").innerText = findTrackAuthorById(idOfcurrentTrack);
     drawTimeCircle();
 
     clearInterval(this.timeTimer);

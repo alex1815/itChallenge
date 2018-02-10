@@ -7,7 +7,7 @@ function initListOfTracks()
     tracks.map( (item, i) => {
         items += 
         `<div class="nameAndAuthor itemOfList-${i}" innerId="${item.id}">
-            <h3 class="nameOfCompositionInList">${item.name}</h3>
+            <h3 class="nameOfComposition">${item.name}</h3>
             <h4 class="author">${item.author}</h4>
         </div>`;
         
