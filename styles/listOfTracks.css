@@ -1,5 +1,6 @@
 .listOfTracksBlock {
-    height: 100%;
+    flex-direction: column;
+    max-width: 50%;
 }
 
 .listOfTrack {
@@ -7,7 +8,7 @@
     border-bottom: 1px solid;
     border-color: grey;
     max-height: 70%;
-    max-width: 60%;
+    width: 100%;
 }
 
 .nameAndAuthor {
@@ -20,4 +21,21 @@
 
 .timerInList {
     background-color: gray;
+}
+
+.closeListButton {
+    padding: 15px;
+}
+
+.height {
+    height: 100%;
+}
+
+.author {
+    margin-top: 5px;
+    font-weight: 1;
+}
+
+.nameOfCompositionInList {
+    margin-bottom: 5px;
 }

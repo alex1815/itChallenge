@@ -12,7 +12,7 @@ let idOfcurrentTrack;
     setTrack(idOfcurrentTrack);
     audio.autoplay = false;
     // TODO back to true
-    audio.autoplay = true;
+    // audio.autoplay = true;
    
     initListOfTracks();
 
