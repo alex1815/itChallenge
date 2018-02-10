@@ -12,7 +12,7 @@ let idOfcurrentTrack;
     setTrack(idOfcurrentTrack);
     audio.autoplay = false;
     // TODO back to true
-    // audio.autoplay = true;
+    audio.autoplay = true;
    
     initListOfTracks();
 
@@ -30,6 +30,7 @@ function drawCircle(id, radius)
     ctx.beginPath();
     ctx.arc(size/2, size/2, radius, 0, 2 * Math.PI);
     ctx.stroke();
+    ctx.closePath();
 }
 
 function drawTimeCircle(onPause = false)
@@ -74,11 +75,12 @@ function drawTimeCircleByContext(ctx, size, radius, onPause)
 
 function drawCircleWithMoving(ctx, size, radius, durationOfMusic, currentTime)
 {
-    ctx.strokeStyle ="red";
-    ctx.lineWidth = 2;
+    ctx.strokeStyle ="white";
+    ctx.lineWidth = 5;
     ctx.beginPath();
     ctx.arc(size/2, size/2, radius, -Math.PI/2, 2 * Math.PI * (currentTime/durationOfMusic) - Math.PI/2);
     ctx.stroke();
+    ctx.closePath();
 }
 
 function preapareCanvas(id, radius)
@@ -100,9 +102,14 @@ function setTrack(idOfTrack)
     document.getElementById("nameOfComposition").innerText = findTrackNameById(idOfcurrentTrack);
     document.getElementById("timeOfTrack").innerText = defaultTime;
     document.getElementById("authorOfComposition").innerText = findTrackAuthorById(idOfcurrentTrack);
+    document.getElementsByTagName("body")[0].style.backgroundImage = `url(${findBackgroundById(idOfcurrentTrack)})`;
     drawTimeCircle();
 
-    clearInterval(this.timeTimer);
+    if (this.timeTimer)
+    {
+        clearInterval(this.timeTimer);
+    }
+
     this.timeTimer = setInterval(() => {
         const minutes = Math.floor(audio.currentTime / 60);
         const seconds = Math.ceil(audio.currentTime % 60);

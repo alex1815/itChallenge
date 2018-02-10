@@ -20,6 +20,11 @@ function findTrackNameById(id)
     return findTrackById(id).name;
 }
 
+function findBackgroundById(id)
+{
+    return findTrackById(id).background;
+}
+
 function getAllTracks()
 {
     return _listOfTracks;

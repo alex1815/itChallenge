@@ -2,10 +2,10 @@
  <head>
   <meta charset="utf-8">
   <title>ITchallenge</title>
-    <script crossorigin src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="styles/playerControl.css">
     <link rel="stylesheet" type="text/css" href="styles/listOfTracks.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+
     <script src="src/listiners.js"></script>
     <script src="src/listOfTracks.js"></script>
     <script src="src/info.js"></script>
@@ -17,12 +17,13 @@
     <div id="playerControl" class="playerControlBlock" style="display:none" >
       
         <div class="flex center border">
-              <canvas id="canvasCircleTimer" class="timerCircle"></canvas>
-              <canvas id="canvasInnerCircle" class="timerCircle"></canvas>
               <canvas id="canvasCircleUnderTimer" class="timerCircle"></canvas>
+              <canvas id="canvasInnerCircle" class="timerCircle"></canvas>
+              <canvas id="canvasCircleTimer" class="timerCircle"></canvas>
   
               <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                  width="26px" height="20px" viewBox="0 0 26 20" enable-background="new 0 0 26 20" xml:space="preserve"  class="listOfTracksButton">
+                  width="26px" height="20px" viewBox="0 0 26 20" enable-background="new 0 0 26 20" xml:space="preserve" 
+                  class="listOfTracksButton whiteSvg">
                 <g>
                   <rect x="11" y="-11" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 15 -11)" width="4" height="26"/>
                   <rect x="11" y="-3" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 23 -3)" width="4" height="26"/>
@@ -31,7 +32,8 @@
               </svg>
 
               <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                  width="36px" height="18px" viewBox="0 0 36 18" enable-background="new 0 0 36 18" xml:space="preserve" class="prevButton">
+                  width="36px" height="18px" viewBox="0 0 36 18" enable-background="new 0 0 36 18" xml:space="preserve" 
+                  class="prevButton whiteSvg">
                 <g>
                   <polygon points="36,17 18,9 36,1 	"/>
                   <polygon points="20,17 2,9 20,1 	"/>
@@ -42,7 +44,8 @@
               <!-- todo check accessibility -->
               <div  class="nextButton">
                 <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                    width="36px" height="18px" viewBox="0 0 36 18" enable-background="new 0 0 36 18" xml:space="preserve">
+                    width="36px" height="18px" viewBox="0 0 36 18" enable-background="new 0 0 36 18" xml:space="preserve"
+                    class="whiteSvg">
                   <g>
                     <polygon points="0,17 18,9 0,1 	"/>
                     <polygon points="16,17 34,9 16,1 	"/>
@@ -61,7 +64,8 @@
         
 
               <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                width="38px" height="18px" viewBox="0 0 38 18" enable-background="new 0 0 38 18" xml:space="preserve" class="pausePlay">
+                width="38px" height="18px" viewBox="0 0 38 18" enable-background="new 0 0 38 18" xml:space="preserve"
+                class="pausePlay whiteSvg">
               <g>
                 <polygon points="0,17 18,9 0,1 	"/>
                 <rect x="26" width="4" height="18"/>
@@ -79,7 +83,7 @@
 
         <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           width="21.2px" height="21.2px" viewBox="0 0 21.2 21.2" enable-background="new 0 0 21.2 21.2" xml:space="preserve"
-          class="closeListButton">
+          class="closeListButton whiteSvg">
         <g>
           <rect x="8.6" y="-2.4" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -4.3906 10.6133)" width="4" height="26"/>
           <rect x="-2.4" y="8.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -4.3867 10.6038)" width="26" height="4"/>

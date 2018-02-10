@@ -22,12 +22,13 @@ function setTimeForTimerInList (duration, currentTime)
     element.width = 300;
     let ctx = element.getContext("2d");
 
-    ctx.strokeStyle ="red";
-    ctx.lineWidth = 5;
+    ctx.strokeStyle ="white";
+    ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.moveTo(0,0);
     ctx.lineTo((currentTime/duration) *  element.width, 0);
     ctx.stroke();
+    ctx.closePath();   
 }
 
 ( () => {
