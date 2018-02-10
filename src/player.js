@@ -32,7 +32,7 @@ function drawCircle(id, radius)
     ctx.stroke();
 }
 
-function drawTimeCircle(duration, currentPostion, onPause)
+function drawTimeCircle(onPause = false)
 {
     if (!this.ctx)
     {
@@ -44,10 +44,10 @@ function drawTimeCircle(duration, currentPostion, onPause)
 
     this.ctx.clearRect(0, 0, element.width, element.height);
 
-    drawTimeCircleByContext(this.ctx, this.size, duration, timerRadius, currentPostion, onPause);
+    drawTimeCircleByContext(this.ctx, this.size, timerRadius, onPause);
 }
 
-function drawTimeCircleByContext(ctx, size, duration, radius, currentPostion = 0, onPause = false)
+function drawTimeCircleByContext(ctx, size, radius, onPause)
 {
     if (this.intervalId)
     {
@@ -56,14 +56,13 @@ function drawTimeCircleByContext(ctx, size, duration, radius, currentPostion = 0
 
     if (onPause)
     {
-        drawCircleWithMoving(this.ctx, this.size, radius, duration, currentPostion);
+        drawCircleWithMoving(this.ctx, this.size, radius, audio.duration, audio.currentTime);
     }
     else
     {
-        const func = () =>
+        function func ()
         {
-            drawCircleWithMoving(this.ctx, this.size, radius, duration, currentPostion);
-            currentPostion++;;
+            drawCircleWithMoving(this.ctx, this.size, radius, audio.duration, audio.currentTime);
         }
 
         func();
@@ -73,12 +72,12 @@ function drawTimeCircleByContext(ctx, size, duration, radius, currentPostion = 0
     }
 }
 
-function drawCircleWithMoving(ctx, size, radius, durationOfMusic, currentPosition)
+function drawCircleWithMoving(ctx, size, radius, durationOfMusic, currentTime)
 {
     ctx.strokeStyle ="red";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(size/2, size/2, radius, -Math.PI/2, 2 * Math.PI * (currentPosition/durationOfMusic) - Math.PI/2);
+    ctx.arc(size/2, size/2, radius, -Math.PI/2, 2 * Math.PI * (currentTime/durationOfMusic) - Math.PI/2);
     ctx.stroke();
 }
 
@@ -91,4 +90,30 @@ function preapareCanvas(id, radius)
     element.width = size;
     element.height = size;
     return { ctx: element.getContext("2d"), size, element };
+}
+
+function setTrack(idOfTrack)
+{
+    const defaultTime = "00:00";
+    idOfcurrentTrack = idOfTrack;
+    audio.src = findTrackPathById(idOfcurrentTrack);
+    document.getElementById("nameOfComposition").innerText = findTrackNameById(idOfcurrentTrack);
+    document.getElementById("timeOfTrack").innerText = defaultTime;
+    drawTimeCircle();
+
+    clearInterval(this.timeTimer);
+    this.timeTimer = setInterval(() => {
+        const minutes = Math.floor(audio.currentTime / 60);
+        const seconds = Math.ceil(audio.currentTime % 60);
+
+        const minutesStr = minutes >= 10
+            ? minutes
+            : "0" + minutes;
+
+        const secondsStr = seconds >= 10
+            ? seconds
+            : "0" + seconds;
+
+        document.getElementById("timeOfTrack").innerText = `${minutesStr}:${secondsStr}`;
+    }, 1000);
 }

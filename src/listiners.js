@@ -4,11 +4,11 @@ function onPausePlay(event)
     if (audio.paused)
     {
         audio.play();
-        drawTimeCircle(audio.duration, audio.currentTime);
+        drawTimeCircle(false);
     }
     else {
         audio.pause();
-        drawTimeCircle(audio.duration, audio.currentTime, true);
+        drawTimeCircle(true);
     }
 }
 
@@ -34,32 +34,6 @@ function onPrevTrack(newIdOfTrack)
             : --idOfcurrentTrack;
 
     setTrack(newidOfcurrentTrack);
-}
-
-function setTrack(idOfTrack)
-{
-    const defaultTime = "00:00";
-    idOfcurrentTrack = idOfTrack;
-    audio.src = findTrackPathById(idOfcurrentTrack);
-    document.getElementById("nameOfComposition").innerText = findTrackNameById(idOfcurrentTrack);
-    document.getElementById("timeOfTrack").innerText = defaultTime;
-    drawTimeCircle(audio.duration);
-
-    clearInterval(this.timeTimer);
-    this.timeTimer = setInterval(() => {
-        const minutes = Math.floor(audio.currentTime / 60);
-        const seconds = Math.ceil(audio.currentTime % 60);
-
-        const minutesStr = minutes >= 10
-            ? minutes
-            : "0" + minutes;
-
-        const secondsStr = seconds >= 10
-            ? seconds
-            : "0" + seconds;
-
-        document.getElementById("timeOfTrack").innerText = `${minutesStr}:${secondsStr}`;
-    }, 1000);
 }
 
 function onOpenListOfTracks()
@@ -103,7 +77,7 @@ function addListiners()
     addListiner("prevButton", () => { onPrevTrack() });
     addListiner("closeListButton", onCloseListOfTracks);
     audio.onended = onAudioEnd;
-    audio.oncanplaythrough = () => { drawTimeCircle(audio.duration) };
+    audio.oncanplaythrough = () => { drawTimeCircle() };
 
     for (let i = 0; i < getAllTracks().length; i++)
     {
