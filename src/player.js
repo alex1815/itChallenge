@@ -14,6 +14,8 @@ let idOfcurrentTrack;
     // TODO back to true
     audio.autoplay = true;
    
+    initListOfTracks();
+
     drawCircle("canvasInnerCircle", innerCircleRadius);
     drawCircle("canvasCircleUnderTimer", timerRadius);
 

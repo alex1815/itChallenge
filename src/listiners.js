@@ -82,8 +82,9 @@ function toggleMainScreen()
     list.style.display = currentState; 
 }
 
-function clickOnTrack(idOfTrack)
+function clickOnTrack(event)
 {
+    const idOfTrack = +(event.currentTarget.attributes["innerId"].value);
     idOfcurrentTrack < idOfTrack
     ? onPrevTrack(idOfTrack)
     : onNextTrack(idOfTrack);
@@ -106,7 +107,7 @@ function addListiners()
 
     for (let i = 0; i < getAllTracks().length; i++)
     {
-        addListiner("itemOfList-" + i, () => { clickOnTrack(i) });
+        addListiner("itemOfList-" + i, clickOnTrack);
     }
 }
 

@@ -1,6 +1,19 @@
 function initListOfTracks()
 {
-    
+    const tracks = getAllTracks();
+    const list = document.getElementById("listOfTrack");
+    let items = "";
+
+    tracks.map( (item, i) => {
+        items += 
+        `<div class="nameAndAuthor itemOfList-${i}" innerId="${item.id}">
+            <h3>${item.name}</h3>
+            <h3>${item.author}</h3>
+        </div>`;
+        
+    });
+
+    list.innerHTML = items;
 }
 
 function setTimeForTimerInList (duration, currentTime)
