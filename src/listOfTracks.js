@@ -1,3 +1,8 @@
+function initListOfTracks()
+{
+    
+}
+
 function setTimeForTimerInList (duration, currentTime)
 {
     const element = document.getElementById("timerInList");

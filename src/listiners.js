@@ -15,7 +15,7 @@ function onPausePlay(event)
 function onNextTrack(newindexOfTrack)
 {
     indexOfcurrentTrack = 
-        newindexOfTrack
+        newindexOfTrack !== undefined
         ? newindexOfTrack
         : indexOfcurrentTrack === listOfMusic.length - 1
             ? 0
@@ -27,7 +27,7 @@ function onNextTrack(newindexOfTrack)
 function onPrevTrack(newindexOfTrack)
 {
     indexOfcurrentTrack = 
-        newindexOfTrack
+        newindexOfTrack  !== undefined
         ? newindexOfTrack
         : indexOfcurrentTrack === 0
             ? listOfMusic.length - 1
@@ -39,6 +39,7 @@ function onPrevTrack(newindexOfTrack)
 function setTrack(indexOfTrack)
 {
     const defaultTime = "00:00";
+    indexOfcurrentTrack = indexOfTrack;
     audio.src = listOfMusic[indexOfcurrentTrack];
     document.getElementById("nameOfComposition").innerText = nameOfTracks[indexOfcurrentTrack];
     document.getElementById("timeOfTrack").innerText = defaultTime;
@@ -81,6 +82,13 @@ function toggleMainScreen()
     list.style.display = currentState; 
 }
 
+function clickOnTrack(indexOfTrack)
+{
+    indexOfcurrentTrack < indexOfTrack
+    ? onPrevTrack(indexOfTrack)
+    : onNextTrack(indexOfTrack);
+}
+
 function onAudioEnd()
 {
     onNextTrack();
@@ -90,11 +98,16 @@ function addListiners()
 {
     addListiner("pausePlay", onPausePlay);
     addListiner("listOfTracksButton", onOpenListOfTracks);
-    addListiner("nextButton", onNextTrack);
-    addListiner("prevButton", onPrevTrack);
+    addListiner("nextButton", () => { onNextTrack() });
+    addListiner("prevButton", () => { onPrevTrack() });
     addListiner("closeListButton", onCloseListOfTracks);
     audio.onended = onAudioEnd;
-    audio.oncanplaythrough = () => {drawTimeCircle(audio.duration)};
+    audio.oncanplaythrough = () => { drawTimeCircle(audio.duration) };
+
+    for (let i = 0; i < listOfMusic.length; i++)
+    {
+        addListiner("itemOfList-" + i, () => { clickOnTrack(i) });
+    }
 }
 
 function addListiner(id, callback)
