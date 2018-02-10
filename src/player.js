@@ -15,7 +15,7 @@ const nameOfTracks = [
 ];
 
 const timerRadius = 180;
-const innerCircleRadius = 140;
+const innerCircleRadius = 125;
 
 let indexOfcurrentTrack;
 
@@ -24,8 +24,9 @@ let indexOfcurrentTrack;
     audio = document.getElementById("audio");
     indexOfcurrentTrack = 0;
     setTrack(indexOfcurrentTrack);
+    audio.autoplay = false;
+    // TODO back to true
     audio.autoplay = true;
-    // audio.autoplay = false;
    
     drawCircle("canvasInnerCircle", innerCircleRadius);
     drawCircle("canvasCircleUnderTimer", timerRadius);
@@ -87,6 +88,7 @@ function drawTimeCircleByContext(ctx, size, duration, radius, currentPostion = 0
 function drawCircleWithMoving(ctx, size, radius, durationOfMusic, currentPosition)
 {
     ctx.strokeStyle ="red";
+    ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.arc(size/2, size/2, radius, -Math.PI/2, 2 * Math.PI * (currentPosition/durationOfMusic) - Math.PI/2);
     ctx.stroke();

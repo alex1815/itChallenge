@@ -5,17 +5,19 @@
     <script crossorigin src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="styles/playerControl.css">
+    <link rel="stylesheet" type="text/css" href="styles/listOfTracks.css">
     <script src="src/listiners.js"></script>
+    <script src="src/listOfTracks.js"></script>
     <script src="src/player.js"></script>
  </head>
   <body onload="initial()">
 
-    <div id="player-control" class="playerControlBlock">
+    <div id="playerControl" class="playerControlBlock" style="display:none" >
       
         <div class="flex center border">
-              <canvas id="canvasCircleTimer" class="timerCircle" width="300px" height="300px"></canvas>
+              <canvas id="canvasCircleTimer" class="timerCircle"></canvas>
               <canvas id="canvasInnerCircle" class="timerCircle"></canvas>
-              <canvas id="canvasCircleUnderTimer" class="timerCircle" width="300px" height="300px"></canvas>
+              <canvas id="canvasCircleUnderTimer" class="timerCircle"></canvas>
   
               <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                   width="26px" height="20px" viewBox="0 0 26 20" enable-background="new 0 0 26 20" xml:space="preserve"  class="listOfTracksButton">
@@ -35,15 +37,18 @@
                 </g>
               </svg>
 
-              <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                  width="36px" height="18px" viewBox="0 0 36 18" enable-background="new 0 0 36 18" xml:space="preserve" class="nextButton">
-                <g>
-                  <polygon points="0,17 18,9 0,1 	"/>
-                  <polygon points="16,17 34,9 16,1 	"/>
-                  <rect x="32" width="4" height="18"/>
-                </g>
-              </svg>
-        
+              <!-- todo check accessibility -->
+              <div  class="nextButton">
+                <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    width="36px" height="18px" viewBox="0 0 36 18" enable-background="new 0 0 36 18" xml:space="preserve">
+                  <g>
+                    <polygon points="0,17 18,9 0,1 	"/>
+                    <polygon points="16,17 34,9 16,1 	"/>
+                    <rect x="32" width="4" height="18"/>
+                  </g>
+                </svg>
+              </div>
+
               <div class="textAlignCenter">                  
                 <div>
                     <h1 id="timeOfTrack" class="timeOfTrack">time of track</h1>
@@ -65,9 +70,23 @@
       </div>
     </div>
 
-    <div id="track-list">
-      
-      </div >
+    <div id="tracksList" class="listOfTracksBlock flex center border">
+      <div>
+        <canvas id="timerInList" class="timerInList" height="2px" width="300px"></canvas>
+        <div class="closeListButton"> x </div>
+
+        <div id="listOfTrack" class="listOfTrack textAlignCenter">
+          <div class="nameAndAuthor">
+            <h3>name</h3>
+            <h3>author</h3>
+          </div>
+          <div class="nameAndAuthor">
+              <h3>name</h3>
+              <h3>author</h3>
+            </div>
+        </div>
+      </div>
+    </div >
 
    </body>
 </html>

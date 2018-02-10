@@ -1,0 +1,23 @@
+.listOfTracksBlock {
+    height: 100%;
+}
+
+.listOfTrack {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: grey;
+    max-height: 70%;
+    max-width: 60%;
+}
+
+.nameAndAuthor {
+    padding-top: 10px;
+}
+
+.nameAndAuthor:last-child {
+    padding-bottom: 10px;
+}
+
+.timerInList {
+    background-color: gray;
+}

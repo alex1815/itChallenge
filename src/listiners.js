@@ -12,20 +12,26 @@ function onPausePlay(event)
     }
 }
 
-function onNextTrack()
+function onNextTrack(newindexOfTrack)
 {
-    indexOfcurrentTrack = indexOfcurrentTrack === listOfMusic.length - 1
-        ? 0
-        : ++indexOfcurrentTrack;
+    indexOfcurrentTrack = 
+        newindexOfTrack
+        ? newindexOfTrack
+        : indexOfcurrentTrack === listOfMusic.length - 1
+            ? 0
+            : ++indexOfcurrentTrack;
 
     setTrack(indexOfcurrentTrack);
 }
 
-function onPrevTrack()
+function onPrevTrack(newindexOfTrack)
 {
-    indexOfcurrentTrack = indexOfcurrentTrack === 0
-    ? listOfMusic.length - 1
-    : --indexOfcurrentTrack;
+    indexOfcurrentTrack = 
+        newindexOfTrack
+        ? newindexOfTrack
+        : indexOfcurrentTrack === 0
+            ? listOfMusic.length - 1
+            : --indexOfcurrentTrack;
 
     setTrack(indexOfcurrentTrack);
 }
@@ -55,9 +61,24 @@ function setTrack(indexOfTrack)
     }, 1000);
 }
 
-function onlistOfTracks()
+function onOpenListOfTracks()
 {
+    toggleMainScreen();
+}
 
+function onCloseListOfTracks()
+{
+    toggleMainScreen();
+}
+
+function toggleMainScreen()
+{
+    let player = document.getElementById("playerControl");
+    let list = document.getElementById("tracksList");
+
+    const currentState = player.style.display;
+    player.style.display = list.style.display;
+    list.style.display = currentState; 
 }
 
 function onAudioEnd()
@@ -68,9 +89,10 @@ function onAudioEnd()
 function addListiners()
 {
     addListiner("pausePlay", onPausePlay);
-    addListiner("listOfTracksButton", onlistOfTracks);
+    addListiner("listOfTracksButton", onOpenListOfTracks);
     addListiner("nextButton", onNextTrack);
     addListiner("prevButton", onPrevTrack);
+    addListiner("closeListButton", onCloseListOfTracks);
     audio.onended = onAudioEnd;
     audio.oncanplaythrough = () => {drawTimeCircle(audio.duration)};
 }

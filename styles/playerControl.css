@@ -23,7 +23,7 @@ body {
 
 .playerControlBlock {
     height: 100%;
-    /* min-height: 400px; */
+    display: block;
 }
 
 .border {
@@ -36,15 +36,11 @@ body {
 
 .prevButton {
     position: absolute;
-    /* float: left; */
-    /* height: 10%; */
     margin-left: calc(-160px + 10px);
 }
 
 .nextButton {
     position: absolute;
-    /* float: right; */
-    /* height: 10%; */
     margin-left: calc(160px - 10px);
 }
 
