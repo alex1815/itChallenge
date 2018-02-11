@@ -48,12 +48,17 @@ function onCloseListOfTracks()
 
 function toggleMainScreen()
 {
-    let player = document.getElementById("playerControl");
-    let list = document.getElementById("tracksList");
+    transformTimeCircle();
+    setTimeout( () => {
+        endTransformationTimeCircle();
 
-    const currentState = player.style.display;
-    player.style.display = list.style.display;
-    list.style.display = currentState; 
+        let player = document.getElementById("playerControl");
+        let list = document.getElementById("tracksList");
+
+        const currentState = player.style.display;
+        player.style.display = list.style.display;
+        list.style.display = currentState; 
+    }, timeOfTimerTransform);
 }
 
 function clickOnTrack(event)
