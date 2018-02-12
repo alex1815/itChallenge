@@ -38,16 +38,8 @@ function onPrevTrack(newIdOfTrack)
 
 function onOpenListOfTracks()
 {  
-    // movingElementUpAndHide("playerControl");
-    // movingElementDownAndOpen("tracksList");
-    
     toggleMainScreen("playerControl", "tracksList");    
     transformTimeCircle();
-
-    
-    setTimeout( () => {
-        // endTransformationTimeCircle();
-    }, timeOfTimerTransform);
 }
 
 function onCloseListOfTracks()
@@ -58,11 +50,6 @@ function onCloseListOfTracks()
     const playerControl = document.getElementById("playerControl");
     tracksList.style.display = "none";
     playerControl.style.display = "block";
-    
-    
-    setTimeout( () => {
-        
-    }, timeOfTimerTransform);
 }
 
 function toggleMainScreen(oldId, newId)
@@ -71,30 +58,12 @@ function toggleMainScreen(oldId, newId)
 
     if (oldId === "playerControl")
     {
-        // todo create fun in player
-        const oldElements = oldElement.querySelectorAll(":not(#canvasCircleTimerTransform):not(#audio):not(#playerControlFlexContainer)");
-        for (let key = 0; key < oldElements.length; key++)
+        if (!changingOpacityForPlayerIsFinished(oldElement, oldId, newId))
         {
-            oldElements[key].style.opacity = oldElements[key].style.opacity ? +oldElements[key].style.opacity - 0.1 : 0.9;
-        }
-
-    
-        if (oldElements[0].style.opacity > 0)
-        {
-            setTimeout(() => {
-                toggleMainScreen(oldId, newId);
-            }, timeOfTimerTransform / 10 );
-            
             return;
         }
-
-        endTransformationTimeCircle();
-
-        for (let key = 0; key < oldElements.length; key++)
-        {
-            oldElements[key].style.opacity = 1;
-        }
     }
+    // TODO
     // else
     // {
     //     // todo create func in list
@@ -160,24 +129,4 @@ function addListiner(id, callback)
 {
     const element = document.getElementsByClassName(id)[0];
     element.addEventListener("click", callback);
-}
-
-
-function movingElementUpAndHide(id)
-{
-    let element = document.getElementById(id);
-    element.style.marginBottom = +element.style.marginBottom + 1;
-    element.style.opacity = +element.style.opacity - 0.1;
-    if (element.style.opacity > 0.1)
-    {
-        setTimeout(() => {
-            movingElementUpAndHide(id);
-        }, timeOfTimerTransform / 11 );
-    } 
-    else
-    {
-        element.style.display = "none";
-        element.style.marginBottom = 0;
-        element.style.opacity = 1;
-    }
 }
