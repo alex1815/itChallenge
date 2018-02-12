@@ -1,3 +1,5 @@
+const sizeOfTimerInList = 300;
+
 function initListOfTracks()
 {
     const tracks = getAllTracks();
@@ -19,7 +21,7 @@ function initListOfTracks()
 function setTimeForTimerInList (duration, currentTime)
 {
     const element = document.getElementById("timerInList");
-    element.width = 300;
+    element.width = sizeOfTimerInList;
     let ctx = element.getContext("2d");
 
     ctx.strokeStyle ="white";
@@ -36,3 +38,8 @@ function setTimeForTimerInList (duration, currentTime)
         setTimeForTimerInList(audio.duration, audio.currentTime)
     }, 1000);
 })();
+
+function popUpTracks()
+{
+    const oldElements = oldElement.querySelectorAll(":not(#canvasCircleTimerTransform):not(#audio):not(#playerControlFlexContainer)");
+}

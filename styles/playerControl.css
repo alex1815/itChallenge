@@ -17,10 +17,7 @@
 .playerControlBlock {
     height: 100%;
     display: block;
-}
-
-.border {
-    /* border: 1px solid blue; */
+    margin-top: -41px;
 }
 
 .textAlignCenter {

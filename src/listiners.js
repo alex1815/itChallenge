@@ -68,44 +68,63 @@ function onCloseListOfTracks()
 function toggleMainScreen(oldId, newId)
 {
     const oldElement = document.getElementById(oldId);
-    oldElement.style.marginTop = (parseInt(oldElement.style.marginTop, 10) - 4) + "px";
 
     if (oldId === "playerControl")
     {
-        const oldElementы = oldElement.querySelectorAll(":not(#canvasCircleTimerTransform):not(#audio):not(#playerControlFlexContainer)")
-        for (let key = 0; key < oldElementы.length; key++)
+        // todo create fun in player
+        const oldElements = oldElement.querySelectorAll(":not(#canvasCircleTimerTransform):not(#audio):not(#playerControlFlexContainer)");
+        for (let key = 0; key < oldElements.length; key++)
         {
-            oldElementы[key].style.opacity = oldElementы[key].style.opacity ? +oldElementы[key].style.opacity - 0.1 : 0.9;
+            oldElements[key].style.opacity = oldElements[key].style.opacity ? +oldElements[key].style.opacity - 0.1 : 0.9;
         }
+
     
-        if (oldElementы[0].style.opacity > 0)
+        if (oldElements[0].style.opacity > 0)
         {
             setTimeout(() => {
                 toggleMainScreen(oldId, newId);
             }, timeOfTimerTransform / 10 );
+            
             return;
-        } 
-    }
-
-    {
-        if (oldId === "playerControl")
-        {
-            endTransformationTimeCircle();
-            const oldElementы = oldElement.querySelectorAll(":not(#canvasCircleTimerTransform):not(#audio):not(#playerControlFlexContainer)")
-            oldElement.style.marginTop = (parseInt(oldElement.style.marginTop, 10) - 5) + "px";
-            for (let key = 0; key < oldElementы.length; key++)
-            {
-                oldElementы[key].style.opacity = 1;
-            }
         }
-        oldElement.style.display = "none";
-        oldElement.style.marginTop = "0";
-        oldElement.style.opacity = 1;
 
-        let elem = document.getElementById(newId);
-        elem.style.display = "block";
-        
+        endTransformationTimeCircle();
+
+        for (let key = 0; key < oldElements.length; key++)
+        {
+            oldElements[key].style.opacity = 1;
+        }
     }
+    // else
+    // {
+    //     // todo create func in list
+    //     const oldElements = oldElement.querySelectorAll(":not(#timerInList)");
+
+    //     for (let key = 0; key < oldElements.length; key++)
+    //     {
+    //         oldElements[key].style.opacity = oldElements[key].style.opacity ? +oldElements[key].style.opacity + 0.1 : 0.1;
+    //     }
+
+    //     if (oldElements[0].style.opacity < 1)
+    //     {
+    //         setTimeout(() => {
+    //             toggleMainScreen(oldId, newId);
+    //         }, timeOfTimerTransform / 10 );
+
+    //         return;
+    //     }
+
+    //     for (let key = 0; key < oldElements.length; key++)
+    //     {
+    //         oldElements[key].style.opacity = 0;
+    //     }
+    // }
+
+    oldElement.style.display = "none";
+    oldElement.style.opacity = 1;
+
+    const newElem = document.getElementById(newId);
+    newElem.style.display = "block";
 }
 
 function clickOnTrack(event)
@@ -162,20 +181,3 @@ function movingElementUpAndHide(id)
         element.style.opacity = 1;
     }
 }
-
-// function movingElementDownAndOpen(id, hideElemId)
-// {
-//     let element = document.getElementById(id);
-//     element.style.marginBottom = 0;
-//     element.style.opacity = +element.style.opacity + 0.1;
-//     if (element.style.opacity < 0.9)
-//     {
-//         setTimeout(() => {
-//             movingElementDownAndOpen(id);
-//         }, timeOfTimerTransform / 10);
-//     }
-//     if (element.style.display === "none")
-//     {
-//         element.style.display = "flex";
-//     }
-// }
