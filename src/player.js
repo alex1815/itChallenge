@@ -109,7 +109,7 @@ function transformTimeCircle ()
     this.timerForTransofrmCircle = setTimeout( () => {
         transformTimeCircle();
         changingRadiusForTransofrmation += this.timerForTransofrmCircle > 0.75
-            ? 150
+            ? 250
             : 3;
     }, duration ); // 70
 }

@@ -67,25 +67,40 @@ function onCloseListOfTracks()
 
 function toggleMainScreen(oldId, newId)
 {
-    let oldElement = document.getElementById(oldId);
-    oldElement.style.marginTop = (parseInt(oldElement.style.marginTop, 10) - 5) + "px";
-    oldElement.style.opacity = +oldElement.style.opacity - 0.1;
-    if (oldElement.style.opacity > 0)
+    const oldElement = document.getElementById(oldId);
+    oldElement.style.marginTop = (parseInt(oldElement.style.marginTop, 10) - 4) + "px";
+
+    if (oldId === "playerControl")
     {
-        setTimeout(() => {
-            toggleMainScreen(oldId, newId);
-        }, timeOfTimerTransform / 10 );
-    } 
-    else
+        const oldElementы = oldElement.querySelectorAll(":not(#canvasCircleTimerTransform):not(#audio):not(#playerControlFlexContainer)")
+        for (let key = 0; key < oldElementы.length; key++)
+        {
+            oldElementы[key].style.opacity = oldElementы[key].style.opacity ? +oldElementы[key].style.opacity - 0.1 : 0.9;
+        }
+    
+        if (oldElementы[0].style.opacity > 0)
+        {
+            setTimeout(() => {
+                toggleMainScreen(oldId, newId);
+            }, timeOfTimerTransform / 10 );
+            return;
+        } 
+    }
+
     {
         if (oldId === "playerControl")
         {
             endTransformationTimeCircle();
+            const oldElementы = oldElement.querySelectorAll(":not(#canvasCircleTimerTransform):not(#audio):not(#playerControlFlexContainer)")
+            oldElement.style.marginTop = (parseInt(oldElement.style.marginTop, 10) - 5) + "px";
+            for (let key = 0; key < oldElementы.length; key++)
+            {
+                oldElementы[key].style.opacity = 1;
+            }
         }
         oldElement.style.display = "none";
         oldElement.style.marginTop = "0";
         oldElement.style.opacity = 1;
-
 
         let elem = document.getElementById(newId);
         elem.style.display = "block";
