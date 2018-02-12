@@ -4,9 +4,10 @@ const timerRadius = 180;
 const innerCircleRadius = 125;
 
 let idOfcurrentTrack;
+let lineWidthOfTimerCircle = 5;
 
 
-const timeOfTimerTransform = 800;
+const timeOfTimerTransform = 700;
 
  function initial()
 {
@@ -14,7 +15,7 @@ const timeOfTimerTransform = 800;
     idOfcurrentTrack = getAllTracks()[0].id;
     setTrack(idOfcurrentTrack);
     // TODO back to 1
-    audio.volume = 0.1;
+    audio.volume = 0;
     audio.autoplay = true;
    
     initListOfTracks();
@@ -66,7 +67,8 @@ function transformTimeCircle ()
     // ctx.stroke();
 
     ctx.strokeStyle ="white";
-    ctx.lineWidth = 5 - this.coefficentForWidthOfTimerTransformation > 1 ? 5 - this.coefficentForWidthOfTimerTransformation : 1;
+    lineWidthOfTimerCircle = 5 - this.coefficentForWidthOfTimerTransformation > 1 ? 5 - this.coefficentForWidthOfTimerTransformation : 1;
+    ctx.lineWidth = lineWidthOfTimerCircle;
     ctx.beginPath();
     let startAngle, endAngle;
     if (audio.duration/2 > audio.currentTime)
@@ -98,6 +100,8 @@ function transformTimeCircle ()
     //ctx.closePath();
     ctx.stroke();
 
+    drawTimeCircle();
+
     const duration = 70;
     this.currentTimeOfTransformation += 1/(changingRadiusForTransofrmation+0.1)/20;
     this.coefficentForWidthOfTimerTransformation += 0.4;
@@ -115,10 +119,11 @@ function transformTimeCircle ()
 function endTransformationTimeCircle()
 {
     const { ctx, element } = preapareCanvas("canvasCircleTimerTransform", timerRadius);
-    // ctx.clearRect(0, 0, element.width, element.height);
+    // TODO add initialization func 
     changingRadiusForTransofrmation = 0;
     this.currentTimeOfTransformation = 0;
     this.coefficentForWidthOfTimerTransformation = 0;
+    lineWidthOfTimerCircle = 5;
     clearTimeout(this.timerForTransofrmCircle);
 }
 
@@ -150,7 +155,7 @@ function drawTimeCircleByContext(ctx, size, radius, onPause)
 function drawCircleWithMoving(ctx, size, radius, durationOfMusic, currentTime)
 {
     ctx.strokeStyle ="white";
-    ctx.lineWidth = 5;
+    ctx.lineWidth = lineWidthOfTimerCircle;
     ctx.beginPath();
     ctx.arc(size/2, size/2, radius, -Math.PI/2, 2 * Math.PI * (currentTime/durationOfMusic) - Math.PI/2);
     ctx.stroke();

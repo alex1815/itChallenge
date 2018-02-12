@@ -37,28 +37,60 @@ function onPrevTrack(newIdOfTrack)
 }
 
 function onOpenListOfTracks()
-{
-    toggleMainScreen();
+{  
+    // movingElementUpAndHide("playerControl");
+    // movingElementDownAndOpen("tracksList");
+    
+    toggleMainScreen("playerControl", "tracksList");    
+    transformTimeCircle();
+
+    
+    setTimeout( () => {
+        // endTransformationTimeCircle();
+    }, timeOfTimerTransform);
 }
 
 function onCloseListOfTracks()
 {
-    toggleMainScreen();
+    toggleMainScreen("tracksList", "playerControl");   
+
+    const tracksList = document.getElementById("tracksList");
+    const playerControl = document.getElementById("playerControl");
+    tracksList.style.display = "none";
+    playerControl.style.display = "block";
+    
+    
+    setTimeout( () => {
+        
+    }, timeOfTimerTransform);
 }
 
-function toggleMainScreen()
+function toggleMainScreen(oldId, newId)
 {
-    transformTimeCircle();
-    setTimeout( () => {
-        endTransformationTimeCircle();
+    let oldElement = document.getElementById(oldId);
+    oldElement.style.marginTop = (parseInt(oldElement.style.marginTop, 10) - 5) + "px";
+    oldElement.style.opacity = +oldElement.style.opacity - 0.1;
+    if (oldElement.style.opacity > 0)
+    {
+        setTimeout(() => {
+            toggleMainScreen(oldId, newId);
+        }, timeOfTimerTransform / 10 );
+    } 
+    else
+    {
+        if (oldId === "playerControl")
+        {
+            endTransformationTimeCircle();
+        }
+        oldElement.style.display = "none";
+        oldElement.style.marginTop = "0";
+        oldElement.style.opacity = 1;
 
-        let player = document.getElementById("playerControl");
-        let list = document.getElementById("tracksList");
 
-        const currentState = player.style.display;
-        player.style.display = list.style.display;
-        list.style.display = currentState; 
-    }, timeOfTimerTransform);
+        let elem = document.getElementById(newId);
+        elem.style.display = "block";
+        
+    }
 }
 
 function clickOnTrack(event)
@@ -95,3 +127,40 @@ function addListiner(id, callback)
     const element = document.getElementsByClassName(id)[0];
     element.addEventListener("click", callback);
 }
+
+
+function movingElementUpAndHide(id)
+{
+    let element = document.getElementById(id);
+    element.style.marginBottom = +element.style.marginBottom + 1;
+    element.style.opacity = +element.style.opacity - 0.1;
+    if (element.style.opacity > 0.1)
+    {
+        setTimeout(() => {
+            movingElementUpAndHide(id);
+        }, timeOfTimerTransform / 11 );
+    } 
+    else
+    {
+        element.style.display = "none";
+        element.style.marginBottom = 0;
+        element.style.opacity = 1;
+    }
+}
+
+// function movingElementDownAndOpen(id, hideElemId)
+// {
+//     let element = document.getElementById(id);
+//     element.style.marginBottom = 0;
+//     element.style.opacity = +element.style.opacity + 0.1;
+//     if (element.style.opacity < 0.9)
+//     {
+//         setTimeout(() => {
+//             movingElementDownAndOpen(id);
+//         }, timeOfTimerTransform / 10);
+//     }
+//     if (element.style.display === "none")
+//     {
+//         element.style.display = "flex";
+//     }
+// }
