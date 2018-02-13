@@ -38,8 +38,3 @@ function setTimeForTimerInList (duration, currentTime)
         setTimeForTimerInList(audio.duration, audio.currentTime)
     }, 1000);
 })();
-
-function popUpTracks()
-{
-    const oldElements = oldElement.querySelectorAll(":not(#canvasCircleTimerTransform):not(#audio):not(#playerControlFlexContainer)");
-}

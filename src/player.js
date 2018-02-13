@@ -3,17 +3,18 @@ let audio;
 const timerRadius = 180;
 const innerCircleRadius = 125;
 
-let idOfcurrentTrack;
+let idOfCurrentTrack;
 let lineWidthOfTimerCircle;
-
+let changingRadiusForTransofrmation;
 
 const timeOfTimerTransform = 700;
 
  function initial()
 {
     audio = document.getElementById("audio");
-    idOfcurrentTrack = getAllTracks()[0].id;
-    setTrack(idOfcurrentTrack);
+    idOfCurrentTrack = getAllTracks()[0].id;
+    document.getElementById("backgroundImageMain").style.backgroundImage = `url(${findBackgroundById(idOfCurrentTrack)})`;
+    setTrack(idOfCurrentTrack);
     // TODO back to 1
     audio.volume = 0;
     audio.autoplay = true;
@@ -29,7 +30,7 @@ const timeOfTimerTransform = 700;
 
 function drawCircle(id, radius)
 { 
-    const { ctx, size } = preapareCanvas(id, radius);
+    const { ctx, size } = prepareCanvas(id, radius);
 
     ctx.strokeStyle ="grey";
     ctx.beginPath();
@@ -42,25 +43,26 @@ function drawTimeCircle(onPause = false)
 {
     if (!this.ctx)
     {
-        const { ctx, size, element } = preapareCanvas("canvasCircleTimer", timerRadius);
+        const { ctx, size, element } = prepareCanvas("canvasCircleTimer", timerRadius);
         this.ctx = ctx;
         this.size = size;
         this.element = element;
     }
 
-    ctx.clearRect(0, 0, element.width, element.height);
+    this.ctx.clearRect(0, 0, this.element.width, this.element.height);
     drawTimeCircleByContext(this.ctx, this.size, timerRadius, onPause);
 }
 
 function transformTimeCircle ()
 {
-    const { ctx, size } = preapareCanvas("canvasCircleTimerTransform", timerRadius, sizeOfTimerInList);
+    const { ctx, size } = prepareCanvas("canvasCircleTimerTransform", timerRadius, sizeOfTimerInList);
 
     lineWidthOfTimerCircle = 5 - this.coefficentForWidthOfTimerTransformation > 1 ? 5 - this.coefficentForWidthOfTimerTransformation : 1;
 
     ctx.strokeStyle ="white";
     ctx.lineWidth = lineWidthOfTimerCircle;
     ctx.beginPath();
+    // todo do full circle
     ctx.arc(sizeOfTimerInList/2, size/2 + changingRadiusForTransofrmation, timerRadius + changingRadiusForTransofrmation, 
         -(0.5 + this.currentTimeOfTransformation)*Math.PI,
         -(0.5 - this.currentTimeOfTransformation)*Math.PI
@@ -86,7 +88,7 @@ function transformTimeCircle ()
 // file:///C:/projects/itChallenge_player/index.html
 function endTransformationTimeCircle()
 {
-    preapareCanvas("canvasCircleTimerTransform", timerRadius);
+    prepareCanvas("canvasCircleTimerTransform", timerRadius);
     initializeVariabels();
     clearTimeout(this.timerForTransofrmCircle);
 }
@@ -125,7 +127,7 @@ function drawCircleWithMoving(ctx, size, radius, durationOfMusic, currentTime)
     ctx.stroke();
 }
 
-function preapareCanvas(id, radius, width)
+function prepareCanvas(id, radius, width)
 {
     const marginOfButtons = 10;
     const sizeOfButtons = 20; 
@@ -139,12 +141,12 @@ function preapareCanvas(id, radius, width)
 function setTrack(idOfTrack)
 {
     const defaultTime = "00:00";
-    idOfcurrentTrack = idOfTrack;
-    audio.src = findTrackPathById(idOfcurrentTrack);
-    document.getElementById("nameOfComposition").innerText = findTrackNameById(idOfcurrentTrack);
+    idOfCurrentTrack = idOfTrack;
+    audio.src = findTrackPathById(idOfCurrentTrack);
+    document.getElementById("nameOfComposition").innerText = findTrackNameById(idOfCurrentTrack);
     document.getElementById("timeOfTrack").innerText = defaultTime;
-    document.getElementById("authorOfComposition").innerText = findTrackAuthorById(idOfcurrentTrack);
-    document.getElementsByTagName("body")[0].style.backgroundImage = `url(${findBackgroundById(idOfcurrentTrack)})`;
+    document.getElementById("authorOfComposition").innerText = findTrackAuthorById(idOfCurrentTrack);
+    setBackground(findBackgroundById(idOfCurrentTrack));
     drawTimeCircle();
 
     if (this.timeTimer)
@@ -203,4 +205,30 @@ function changingOpacityForPlayerIsFinished(oldElement, oldId, newId)
     }
 
     return true;
+}
+
+function moveSlider(path) {
+     const elem = document.getElementById("backgroundImageLeft");
+     const value = parseInt(elem.style.left, 10);
+     const shift = 10;
+
+     elem.style.left = (value - shift) + "%";
+     if (value - shift === 0)
+     {
+         document.getElementById("backgroundImageMain").style.backgroundImage = `url(${path})`;
+         elem.style.left = "100%";
+     }
+     else
+     {
+         setTimeout(() => {
+             moveSlider(path);
+         }, 15);
+     }
+}
+
+function setBackground(path)
+{
+    document.getElementById("backgroundImageLeft").style.backgroundImage = `url(${path})`;
+
+    moveSlider(path);
 }

@@ -1,10 +1,11 @@
 
-function onPausePlay(event)
+// TODO rename all const to uppercase
+
+function onPausePlay()
 {
     if (audio.paused)
     {
-        audio.play();
-        drawTimeCircle(false);
+        audio.play().then(() => drawTimeCircle(false));
     }
     else {
         audio.pause();
@@ -14,26 +15,26 @@ function onPausePlay(event)
 
 function onNextTrack(newIdOfTrack)
 {
-    const newidOfcurrentTrack = 
+    const newidOfCurrentTrack =
         newIdOfTrack !== undefined
         ? newIdOfTrack
-        : idOfcurrentTrack === getAllTracks().length - 1
+        : idOfCurrentTrack === getAllTracks().length - 1
             ? 0
-            : ++idOfcurrentTrack;
+            : ++idOfCurrentTrack;
 
-    setTrack(newidOfcurrentTrack);
+    setTrack(newidOfCurrentTrack);
 }
 
 function onPrevTrack(newIdOfTrack)
 {
-    const newidOfcurrentTrack = 
+    const newidOfCurrentTrack =
         newIdOfTrack  !== undefined
         ? newIdOfTrack
-        : idOfcurrentTrack === 0
+        : idOfCurrentTrack === 0
             ? getAllTracks().length - 1
-            : --idOfcurrentTrack;
+            : --idOfCurrentTrack;
 
-    setTrack(newidOfcurrentTrack);
+    setTrack(newidOfCurrentTrack);
 }
 
 function onOpenListOfTracks()
@@ -63,31 +64,6 @@ function toggleMainScreen(oldId, newId)
             return;
         }
     }
-    // TODO
-    // else
-    // {
-    //     // todo create func in list
-    //     const oldElements = oldElement.querySelectorAll(":not(#timerInList)");
-
-    //     for (let key = 0; key < oldElements.length; key++)
-    //     {
-    //         oldElements[key].style.opacity = oldElements[key].style.opacity ? +oldElements[key].style.opacity + 0.1 : 0.1;
-    //     }
-
-    //     if (oldElements[0].style.opacity < 1)
-    //     {
-    //         setTimeout(() => {
-    //             toggleMainScreen(oldId, newId);
-    //         }, timeOfTimerTransform / 10 );
-
-    //         return;
-    //     }
-
-    //     for (let key = 0; key < oldElements.length; key++)
-    //     {
-    //         oldElements[key].style.opacity = 0;
-    //     }
-    // }
 
     oldElement.style.display = "none";
     oldElement.style.opacity = 1;
@@ -99,7 +75,7 @@ function toggleMainScreen(oldId, newId)
 function clickOnTrack(event)
 {
     const idOfTrack = +(event.currentTarget.attributes["innerId"].value);
-    idOfcurrentTrack < idOfTrack
+    idOfCurrentTrack < idOfTrack
     ? onPrevTrack(idOfTrack)
     : onNextTrack(idOfTrack);
 }
