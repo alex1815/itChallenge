@@ -15,26 +15,26 @@ function onPausePlay()
 
 function onNextTrack(newIdOfTrack)
 {
-    const newidOfCurrentTrack =
+    const newIdOfCurrentTrack =
         newIdOfTrack !== undefined
         ? newIdOfTrack
         : idOfCurrentTrack === getAllTracks().length - 1
             ? 0
             : ++idOfCurrentTrack;
 
-    setTrack(newidOfCurrentTrack);
+    setTrack(newIdOfCurrentTrack);
 }
 
 function onPrevTrack(newIdOfTrack)
 {
-    const newidOfCurrentTrack =
+    const newIdOfCurrentTrack =
         newIdOfTrack  !== undefined
         ? newIdOfTrack
         : idOfCurrentTrack === 0
             ? getAllTracks().length - 1
             : --idOfCurrentTrack;
 
-    setTrack(newidOfCurrentTrack);
+    setTrack(newIdOfCurrentTrack);
 }
 
 function onOpenListOfTracks()
@@ -74,7 +74,12 @@ function toggleMainScreen(oldId, newId)
 
 function clickOnTrack(event)
 {
-    const idOfTrack = +(event.currentTarget.attributes["innerId"].value);
+    const idOfTrack = +(event.currentTarget.attributes["innerid"].value);
+    const oldTrack = document.getElementsByClassName(`itemOfList-${idOfCurrentTrack}`)[0];
+
+    oldTrack.classList.remove("selectedElement");
+    event.currentTarget.classList.add("selectedElement");
+
     idOfCurrentTrack < idOfTrack
     ? onPrevTrack(idOfTrack)
     : onNextTrack(idOfTrack);

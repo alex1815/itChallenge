@@ -13,6 +13,7 @@
 
 .nameAndAuthor {
     padding-top: 10px;
+    cursor: pointer;
 }
 
 .nameAndAuthor:last-child {
@@ -38,4 +39,8 @@
 
 .nameOfComposition {
     margin-bottom: 5px;
+}
+
+.selectedElement {
+    color: aqua;
 }

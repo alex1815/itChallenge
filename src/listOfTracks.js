@@ -6,9 +6,9 @@ function initListOfTracks()
     const list = document.getElementById("listOfTrack");
     let items = "";
 
-    tracks.map( (item, i) => {
+    tracks.map( (item) => {
         items += 
-        `<div class="nameAndAuthor itemOfList-${i}" innerId="${item.id}">
+        `<div class="nameAndAuthor itemOfList-${item.id} ${item.id === idOfCurrentTrack ? 'selectedElement' : null }" innerid=${item.id} >
             <h3 class="nameOfComposition">${item.name}</h3>
             <h4 class="author">${item.author}</h4>
         </div>`;
