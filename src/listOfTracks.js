@@ -1,6 +1,6 @@
 const sizeOfTimerInList = 300;
 
-function initListOfTracks()
+function initListOfTracks(firstTrackId)
 {
     const tracks = getAllTracks();
     const list = document.getElementById("listOfTrack");
@@ -8,7 +8,7 @@ function initListOfTracks()
 
     tracks.map( (item) => {
         items += 
-        `<div class="nameAndAuthor itemOfList-${item.id} ${item.id === idOfCurrentTrack ? 'selectedElement' : null }" innerid=${item.id} >
+        `<div class="nameAndAuthor itemOfList-${item.id} ${item.id === firstTrackId ? 'selectedElement' : '' }" innerid=${item.id} >
             <h3 class="nameOfComposition">${item.name}</h3>
             <h4 class="author">${item.author}</h4>
         </div>`;

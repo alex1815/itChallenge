@@ -15,26 +15,38 @@ function onPausePlay()
 
 function onNextTrack(newIdOfTrack)
 {
-    const newIdOfCurrentTrack =
-        newIdOfTrack !== undefined
-        ? newIdOfTrack
-        : idOfCurrentTrack === getAllTracks().length - 1
-            ? 0
-            : ++idOfCurrentTrack;
+    if (newIdOfTrack !== undefined)
+    {
+        setTrack(newIdOfTrack);
+        return;
+    }
 
-    setTrack(newIdOfCurrentTrack);
+    const index = getIndexOfTrackById(idOfCurrentTrack);
+    const tracks = getAllTracks();
+
+    const prevTrackId = (index === 0)
+        ? tracks[tracks.length-1].id
+        : tracks[index - 1].id;
+
+    setTrack(prevTrackId);
 }
 
 function onPrevTrack(newIdOfTrack)
 {
-    const newIdOfCurrentTrack =
-        newIdOfTrack  !== undefined
-        ? newIdOfTrack
-        : idOfCurrentTrack === 0
-            ? getAllTracks().length - 1
-            : --idOfCurrentTrack;
+    if (newIdOfTrack !== undefined)
+    {
+        setTrack(newIdOfTrack);
+        return;
+    }
 
-    setTrack(newIdOfCurrentTrack);
+    const index = getIndexOfTrackById(idOfCurrentTrack);
+    const tracks = getAllTracks();
+
+    const nextTrackId = (index === tracks.length-1)
+        ? tracks[0].id
+        : tracks[index + 1].id;
+
+    setTrack(nextTrackId);
 }
 
 function onOpenListOfTracks()
@@ -75,19 +87,32 @@ function toggleMainScreen(oldId, newId)
 function clickOnTrack(event)
 {
     const idOfTrack = +(event.currentTarget.attributes["innerid"].value);
+    setTrack(idOfTrack);
+}
+
+function changeTrackInList(idOfTrack)
+{
+    // TODO on click to previous\next track, selected element didn't changes
+
+    if (idOfTrack === idOfCurrentTrack)
+    {
+        return;
+    }
+
     const oldTrack = document.getElementsByClassName(`itemOfList-${idOfCurrentTrack}`)[0];
+    const newTrack = document.getElementsByClassName(`itemOfList-${idOfTrack}`)[0];
+// add getting element instead  event.currentTarget
+    oldTrack && oldTrack.classList.remove("selectedElement");
+    newTrack && newTrack.classList.add("selectedElement");
 
-    oldTrack.classList.remove("selectedElement");
-    event.currentTarget.classList.add("selectedElement");
-
-    idOfCurrentTrack < idOfTrack
-    ? onPrevTrack(idOfTrack)
-    : onNextTrack(idOfTrack);
+    // idOfCurrentTrack < idOfTrack
+    // ? onNextTrack(idOfTrack)
+    // : onPrevTrack(idOfTrack);
 }
 
 function onAudioEnd()
 {
-    onNextTrack();
+    onNextTrack(nextTrackId);
 }
 
 function addListiners()

@@ -8,3 +8,5 @@ higlight current track in tracks list
 
 TODO
 add float swaping between background
+
+As app very simple, we thinks that data from server always were get before initialization

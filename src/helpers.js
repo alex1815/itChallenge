@@ -29,3 +29,10 @@ function getAllTracks()
 {
     return _listOfTracks;
 }
+
+function getIndexOfTrackById(id) {
+    const tracks = getAllTracks();
+    return tracks.findIndex((track) => {
+        return track.id === id;
+    });
+}

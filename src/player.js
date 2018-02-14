@@ -12,20 +12,23 @@ const timeOfTimerTransform = 700;
  function initial()
 {
     audio = document.getElementById("audio");
-    idOfCurrentTrack = getAllTracks()[0].id;
-    document.getElementById("backgroundImageMain").style.backgroundImage = `url(${findBackgroundById(idOfCurrentTrack)})`;
-    setTrack(idOfCurrentTrack);
-    // TODO back to 1
-    audio.volume = 0;
-    audio.autoplay = true;
-   
+    const firstTrackId = getAllTracks()[0].id;
+    document.getElementById("backgroundImageMain").style.backgroundColor =
+        "black";
+
     initializeVariabels();
-    initListOfTracks();
+    initListOfTracks(firstTrackId);
+
+    setTrack(firstTrackId);
 
     drawCircle("canvasInnerCircle", innerCircleRadius);
     drawCircle("canvasCircleUnderTimer", timerRadius);
 
     addListiners();
+
+    // TODO back to 1
+    audio.volume = 0;
+    audio.autoplay = true;
 }
 
 function drawCircle(id, radius)
@@ -140,7 +143,14 @@ function prepareCanvas(id, radius, width)
 
 function setTrack(idOfTrack)
 {
+    if (idOfTrack === idOfCurrentTrack)
+    {
+        onPausePlay();
+        return;
+    }
+
     const defaultTime = "00:00";
+    changeTrackInList(idOfTrack);
     idOfCurrentTrack = idOfTrack;
     audio.src = findTrackPathById(idOfCurrentTrack);
     document.getElementById("nameOfComposition").innerText = findTrackNameById(idOfCurrentTrack);
