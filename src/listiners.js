@@ -1,6 +1,3 @@
-
-// TODO rename all const to uppercase
-
 function onPausePlay()
 {
     if (audio.paused)
@@ -90,29 +87,14 @@ function onAudioEnd()
     onNextTrack();
 }
 
-// function onChangeTime (event)
-// {
-//     const x = event.offsetX;
-//     const y = event.offsetY;
-//
-//     const { element } = prepareCanvas("canvasCircleTimer", timerRadius);
-//
-//     const angleRadians = Math.atan2(y, x - element.width/2) * 180 / Math.PI;
-//     audio.currentTime = angleRadians/180*Math.PI /Math.PI * audio.duration;
-//     console.log(angleRadians);
-// }
-
 function addListeners()
 {
-    addListener("pausePlay", onPausePlay);
-    addListener("listOfTracksButton", onOpenListOfTracks);
-    // addListener("nextButton", () => { onNextTrack() });
-    // addListener("prevButton", () => { onPrevTrack() });
-    addListenerToMouseUpDown("nextButton", onLongPressToNextButton, () => { onNextTrack() });
-    addListenerToMouseUpDown("prevButton", onLongPressToPrevButton, () => { onPrevTrack() });
+    addListener("pause-play", onPausePlay);
+    addListener("list-of-tracks-button", onOpenListOfTracks);
+    addListenerToMouseUpDown("next-button", onLongPressToNextButton, () => { onNextTrack() });
+    addListenerToMouseUpDown("prev-button", onLongPressToPrevButton, () => { onPrevTrack() });
 
-    addListener("closeListButton", onCloseListOfTracks);
-    //addListenerById("canvasCircleTimer", onChangeTime);
+    addListener("close-list-button", onCloseListOfTracks);
     audio.onended = onAudioEnd;
     audio.oncanplaythrough = () => { drawTimeCircle() };
 
@@ -137,6 +119,7 @@ function addListenerToMouseUpDown(id, onLongPressToButton, onClick) {
     {
         pressTimer = setTimeout(() => {
             longPress = true;
+            onLongPressToButton(event);
             longPressExecution = setInterval(() => onLongPressToButton(event), 1000);
         }, 1000);
     });
@@ -154,8 +137,3 @@ function addListenerToMouseUpDown(id, onLongPressToButton, onClick) {
         onClick(event);
     });
 }
-
-// function addListenerById(id, callback) {
-//     const element = document.getElementById(id);
-//     element.addEventListener("click", callback);
-// }

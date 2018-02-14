@@ -1,9 +1,9 @@
-.listOfTracksBlock {
+.list-of-tracks-block {
     flex-direction: column;
     max-width: 50%;
 }
 
-.listOfTrack {
+.list-of-tracks {
     border-top: 1px solid;
     border-bottom: 1px solid;
     border-color: grey;
@@ -11,20 +11,20 @@
     width: 100%;
 }
 
-.nameAndAuthor {
+.name-and-author {
     padding-top: 10px;
     cursor: pointer;
 }
 
-.nameAndAuthor:last-child {
+.name-and-author:last-child {
     padding-bottom: 10px;
 }
 
-.timerInList {
+.timer-in-list {
     background-color: gray;
 }
 
-.closeListButton {
+.close-list-button {
     padding: 15px;
 }
 
@@ -37,11 +37,11 @@
     font-weight: 1px;
 }
 
-.nameOfComposition {
+.name-of-composition {
     margin-bottom: 5px;
 }
 
-.selectedElement {
+.selected-element {
     text-decoration: underline;
     color: 	#FAFAD2;
 }

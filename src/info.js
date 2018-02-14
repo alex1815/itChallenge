@@ -1,5 +1,5 @@
 // we can thinks that this list had come from server
-// we propose that id is number. For string impementation, we should use Guid
+// we propose that id is number. For string implementation, we should use Guid
 const _listOfTracks = [
     {
         id: 0,
@@ -29,4 +29,4 @@ const _listOfTracks = [
         author: "Frédéric Chopin",
         background: "./assets/images/6284055448_e0d5c1af67_o.jpg",
     },
-]
+];

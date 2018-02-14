@@ -14,48 +14,48 @@
     justify-content: center;
 }
 
-.playerControlBlock {
+.player-control-block {
     height: 100%;
     display: block;
     margin-top: -41px;
 }
 
-.textAlignCenter {
+
+.text-align-center {
     text-align: center;
 }
 
-.prevButton {
+.prev-button {
     position: absolute;
     margin-left: calc(-160px + 10px);
 }
 
-.nextButton {
+.next-button {
     position: absolute;
     margin-left: calc(160px - 10px);
 }
 
-/* 160 - radius of circle */
-.listOfTracksButton {
+.list-of-tracks-button {
     position: absolute;
     margin-top: calc(-160px + 10px);
 }
 
-.pausePlay {
+.pause-play {
     position: absolute;
     height: 20px;
     margin-top: calc(160px - 10px);
 }
 
-.timerCircle {
+.timer-circle {
     position: absolute;
     height: auto;
     width: auto;
 }
 
-.timeOfTrack {
+.time-of-track {
     font-size: 3em;
 }
 
-.innerBlockWithAuthorTimeName {
+.inner-block-with-author-time-name {
     max-width: 220px;
 }

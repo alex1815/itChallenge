@@ -11,12 +11,11 @@ svg:hover {
     cursor: pointer;
 }
 
-/* todo переписать на a-b */
-.whiteSvg {
+.white-svg {
     fill: white;
 }
 
-.backgroundImage {
+.background-image {
     height: 100%;
     width: 100%;
     position: absolute;

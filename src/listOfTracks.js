@@ -1,15 +1,15 @@
-const sizeOfTimerInList = 300;
+const SIZE_OF_TIMER_IN_LIST = 300;
 
 function initListOfTracks(firstTrackId)
 {
     const tracks = getAllTracks();
-    const list = document.getElementById("listOfTrack");
+    const list = document.getElementById("list-of-tracks");
     let items = "";
 
     tracks.map( (item) => {
         items += 
-        `<div class="nameAndAuthor itemOfList-${item.id} ${item.id === firstTrackId ? 'selectedElement' : '' }" innerid=${item.id} >
-            <h3 class="nameOfComposition">${item.name}</h3>
+        `<div class="name-and-author itemOfList-${item.id} ${item.id === firstTrackId ? 'selected-element' : '' }" innerid=${item.id} >
+            <h3 class="name-of-composition">${item.name}</h3>
             <h4 class="author">${item.author}</h4>
         </div>`;
         
@@ -20,8 +20,8 @@ function initListOfTracks(firstTrackId)
 
 function setTimeForTimerInList (duration, currentTime)
 {
-    const element = document.getElementById("timerInList");
-    element.width = sizeOfTimerInList;
+    const element = document.getElementById("timer-in-list");
+    element.width = SIZE_OF_TIMER_IN_LIST;
     let ctx = element.getContext("2d");
 
     ctx.strokeStyle ="white";
@@ -49,8 +49,8 @@ function changeTrackInList(idOfTrack)
     const oldTrack = document.getElementsByClassName(`itemOfList-${idOfCurrentTrack}`)[0];
     const newTrack = document.getElementsByClassName(`itemOfList-${idOfTrack}`)[0];
 
-    oldTrack && oldTrack.classList.remove("selectedElement");
-    newTrack && newTrack.classList.add("selectedElement");
+    oldTrack && oldTrack.classList.remove("selected-element");
+    newTrack && newTrack.classList.add("selected-element");
 }
 
 function onOpenListOfTracks()
