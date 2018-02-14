@@ -13,7 +13,7 @@ function onPausePlay()
     }
 }
 
-function onNextTrack(newIdOfTrack)
+function onPrevTrack(newIdOfTrack)
 {
     if (newIdOfTrack !== undefined)
     {
@@ -31,7 +31,7 @@ function onNextTrack(newIdOfTrack)
     setTrack(prevTrackId);
 }
 
-function onPrevTrack(newIdOfTrack)
+function onNextTrack(newIdOfTrack)
 {
     if (newIdOfTrack !== undefined)
     {
@@ -49,20 +49,21 @@ function onPrevTrack(newIdOfTrack)
     setTrack(nextTrackId);
 }
 
-function onOpenListOfTracks()
-{  
-    toggleMainScreen("playerControl", "tracksList");    
-    transformTimeCircle();
+function onLongPressToNextButton() {
+    audio.currentTime += 4;
+    if (audio.currentTime >= audio.duration)
+    {
+        onNextTrack();
+    }
 }
 
-function onCloseListOfTracks()
-{
-    toggleMainScreen("tracksList", "playerControl");   
-
-    const tracksList = document.getElementById("tracksList");
-    const playerControl = document.getElementById("playerControl");
-    tracksList.style.display = "none";
-    playerControl.style.display = "block";
+function onLongPressToPrevButton() {
+    const changingOfTime = 6;
+    audio.currentTime -= changingOfTime;
+    if (audio.currentTime < changingOfTime)
+    {
+        onPrevTrack();
+    }
 }
 
 function toggleMainScreen(oldId, newId)
@@ -84,55 +85,77 @@ function toggleMainScreen(oldId, newId)
     newElem.style.display = "block";
 }
 
-function clickOnTrack(event)
-{
-    const idOfTrack = +(event.currentTarget.attributes["innerid"].value);
-    setTrack(idOfTrack);
-}
-
-function changeTrackInList(idOfTrack)
-{
-    // TODO on click to previous\next track, selected element didn't changes
-
-    if (idOfTrack === idOfCurrentTrack)
-    {
-        return;
-    }
-
-    const oldTrack = document.getElementsByClassName(`itemOfList-${idOfCurrentTrack}`)[0];
-    const newTrack = document.getElementsByClassName(`itemOfList-${idOfTrack}`)[0];
-// add getting element instead  event.currentTarget
-    oldTrack && oldTrack.classList.remove("selectedElement");
-    newTrack && newTrack.classList.add("selectedElement");
-
-    // idOfCurrentTrack < idOfTrack
-    // ? onNextTrack(idOfTrack)
-    // : onPrevTrack(idOfTrack);
-}
-
 function onAudioEnd()
 {
-    onNextTrack(nextTrackId);
+    onNextTrack();
 }
 
-function addListiners()
+// function onChangeTime (event)
+// {
+//     const x = event.offsetX;
+//     const y = event.offsetY;
+//
+//     const { element } = prepareCanvas("canvasCircleTimer", timerRadius);
+//
+//     const angleRadians = Math.atan2(y, x - element.width/2) * 180 / Math.PI;
+//     audio.currentTime = angleRadians/180*Math.PI /Math.PI * audio.duration;
+//     console.log(angleRadians);
+// }
+
+function addListeners()
 {
-    addListiner("pausePlay", onPausePlay);
-    addListiner("listOfTracksButton", onOpenListOfTracks);
-    addListiner("nextButton", () => { onNextTrack() });
-    addListiner("prevButton", () => { onPrevTrack() });
-    addListiner("closeListButton", onCloseListOfTracks);
+    addListener("pausePlay", onPausePlay);
+    addListener("listOfTracksButton", onOpenListOfTracks);
+    // addListener("nextButton", () => { onNextTrack() });
+    // addListener("prevButton", () => { onPrevTrack() });
+    addListenerToMouseUpDown("nextButton", onLongPressToNextButton, () => { onNextTrack() });
+    addListenerToMouseUpDown("prevButton", onLongPressToPrevButton, () => { onPrevTrack() });
+
+    addListener("closeListButton", onCloseListOfTracks);
+    //addListenerById("canvasCircleTimer", onChangeTime);
     audio.onended = onAudioEnd;
     audio.oncanplaythrough = () => { drawTimeCircle() };
 
     for (let i = 0; i < getAllTracks().length; i++)
     {
-        addListiner("itemOfList-" + i, clickOnTrack);
+        addListener("itemOfList-" + i, clickOnTrack);
     }
 }
 
-function addListiner(id, callback)
+function addListener(id, callback)
 {
     const element = document.getElementsByClassName(id)[0];
     element.addEventListener("click", callback);
 }
+
+function addListenerToMouseUpDown(id, onLongPressToButton, onClick) {
+    const element = document.getElementsByClassName(id)[0];
+    let pressTimer, longPressExecution;
+    let longPress = false;
+
+    element.addEventListener("mousedown", (event) =>
+    {
+        pressTimer = setTimeout(() => {
+            longPress = true;
+            longPressExecution = setInterval(() => onLongPressToButton(event), 1000);
+        }, 1000);
+    });
+
+    element.addEventListener("mouseup", (event) =>
+    {
+        clearTimeout(pressTimer);
+        if (longPress)
+        {
+            clearInterval(longPressExecution);
+            longPress = false;
+            return;
+        }
+
+        onClick(event);
+    });
+}
+
+// function addListenerById(id, callback) {
+//     const element = document.getElementById(id);
+//     element.addEventListener("click", callback);
+// }

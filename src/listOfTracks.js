@@ -33,6 +33,37 @@ function setTimeForTimerInList (duration, currentTime)
     ctx.closePath();   
 }
 
+function clickOnTrack(event)
+{
+    const idOfTrack = +(event.currentTarget.attributes["innerid"].value);
+    setTrack(idOfTrack);
+}
+
+function changeTrackInList(idOfTrack)
+{
+    if (idOfTrack === idOfCurrentTrack)
+    {
+        return;
+    }
+
+    const oldTrack = document.getElementsByClassName(`itemOfList-${idOfCurrentTrack}`)[0];
+    const newTrack = document.getElementsByClassName(`itemOfList-${idOfTrack}`)[0];
+
+    oldTrack && oldTrack.classList.remove("selectedElement");
+    newTrack && newTrack.classList.add("selectedElement");
+}
+
+function onOpenListOfTracks()
+{
+    toggleMainScreen("playerControl", "tracksList");
+    transformTimeCircle();
+}
+
+function onCloseListOfTracks()
+{
+    toggleMainScreen("tracksList", "playerControl");
+}
+
 ( () => {
     setInterval( () => {
         setTimeForTimerInList(audio.duration, audio.currentTime)

@@ -24,10 +24,10 @@ const timeOfTimerTransform = 700;
     drawCircle("canvasInnerCircle", innerCircleRadius);
     drawCircle("canvasCircleUnderTimer", timerRadius);
 
-    addListiners();
+    addListeners();
 
     // TODO back to 1
-    audio.volume = 0;
+    audio.volume = 1;
     audio.autoplay = true;
 }
 

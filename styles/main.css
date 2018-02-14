@@ -6,6 +6,10 @@ body {
     color: white;
 }
 
+svg:hover {
+    cursor: pointer;
+}
+
 /* todo переписать на a-b */
 .whiteSvg {
     fill: white;
