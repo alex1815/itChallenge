@@ -27,7 +27,7 @@ const timeOfTimerTransform = 700;
     addListeners();
 
     // TODO back to 1
-    audio.volume = 1;
+    audio.volume = 0;
     audio.autoplay = true;
 }
 

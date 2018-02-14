@@ -42,5 +42,6 @@
 }
 
 .selectedElement {
-    color: aqua;
+    text-decoration: underline;
+    color: 	#FAFAD2;
 }
