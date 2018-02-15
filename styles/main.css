@@ -23,3 +23,7 @@ svg:hover {
     left: 0;
     z-index: -1;
 }
+
+.background-image-default-color {
+    background-color: black;
+}

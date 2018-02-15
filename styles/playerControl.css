@@ -35,11 +35,6 @@
     margin-left: calc(160px - 10px);
 }
 
-.list-of-tracks-button {
-    position: absolute;
-    margin-top: calc(-160px + 10px);
-}
-
 .pause-play {
     position: absolute;
     height: 20px;
@@ -50,10 +45,6 @@
     position: absolute;
     height: auto;
     width: auto;
-}
-
-.time-of-track {
-    font-size: 3em;
 }
 
 .inner-block-with-author-time-name {

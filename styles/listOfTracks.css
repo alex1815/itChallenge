@@ -45,3 +45,12 @@
     text-decoration: underline;
     color: 	#FAFAD2;
 }
+
+.list-of-tracks-button {
+    position: absolute;
+    margin-top: calc(-160px + 10px);
+}
+
+.time-of-track {
+    font-size: 3em;
+}

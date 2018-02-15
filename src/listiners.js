@@ -2,11 +2,16 @@ function onPausePlay()
 {
     if (audio.paused)
     {
-        audio.play().then(() => drawTimeCircle(false));
+        audio.play().then(() => {
+            drawTimeCircle(false);
+            drawTime();
+        });
     }
-    else {
+    else
+    {
+        clearTimeout(drawTimeCircleTimeoutId);
+        clearTimeout(timeInPlayerSetTimeoutId);
         audio.pause();
-        drawTimeCircle(true);
     }
 }
 

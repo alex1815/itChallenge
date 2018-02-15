@@ -2,21 +2,20 @@ let audio;
 
 const TIMER_RADIUS = 180;
 const INNER_CIRCLE_RADIUS = 125;
+const TIME_OF_TIMER_TRANSFORMATION = 700;
 
 let idOfCurrentTrack;
 let lineWidthOfTimerCircle;
-let changingRadiusForTransofrmation;
+let changingRadiusForTransformation;
+let drawTimeCircleTimeoutId;
+let timeInPlayerSetTimeoutId;
 
-const TIME_OF_TIMER_TRANSFORMATION = 700;
-
- function initial()
+function initial()
 {
     audio = document.getElementById("audio");
     const firstTrackId = getAllTracks()[0].id;
-    document.getElementById("backgroundImageMain").style.backgroundColor =
-        "black";
 
-    initializeVariabels();
+    initializeVariables();
     initListOfTracks(firstTrackId);
 
     setTrack(firstTrackId);
@@ -27,6 +26,15 @@ const TIME_OF_TIMER_TRANSFORMATION = 700;
     addListeners();
 
     audio.autoplay = true;
+}
+
+function initializeVariables()
+{
+    this.timeAnimationExecution = 0;
+    changingRadiusForTransformation = 0;
+    this.currentTimeOfTransformation = 0;
+    this.coefficentForWidthOfTimerTransformation = 0;
+    lineWidthOfTimerCircle = 5;
 }
 
 function drawCircle(id, radius)
@@ -63,7 +71,7 @@ function transformTimeCircle ()
     ctx.strokeStyle ="white";
     ctx.lineWidth = lineWidthOfTimerCircle;
     ctx.beginPath();
-    ctx.arc(SIZE_OF_TIMER_IN_LIST/2, size/2 + changingRadiusForTransofrmation, TIMER_RADIUS + changingRadiusForTransofrmation,
+    ctx.arc(SIZE_OF_TIMER_IN_LIST/2, size/2 + changingRadiusForTransformation, TIMER_RADIUS + changingRadiusForTransformation,
         -(0.5 + this.currentTimeOfTransformation)*Math.PI,
         -(0.5 - this.currentTimeOfTransformation)*Math.PI
     );
@@ -72,13 +80,13 @@ function transformTimeCircle ()
     drawTimeCircle();
 
     const frequencyOfDrawing = 30;
-    this.currentTimeOfTransformation += 1/(changingRadiusForTransofrmation+0.1)/20;
+    this.currentTimeOfTransformation += 1/(changingRadiusForTransformation+0.1)/20;
     this.coefficentForWidthOfTimerTransformation += 0.4;
 
     this.timerForTransofrmCircle = setTimeout( () => {
         transformTimeCircle();
         this.timeAnimationExecution += frequencyOfDrawing;
-        changingRadiusForTransofrmation += this.timeAnimationExecution > frequencyOfDrawing*5
+        changingRadiusForTransformation += this.timeAnimationExecution > frequencyOfDrawing*5
             ? 1250
             : 100;
     }, frequencyOfDrawing );
@@ -87,31 +95,32 @@ function transformTimeCircle ()
 function endTransformationTimeCircle()
 {
     prepareCanvas("canvasCircleTimerTransform", TIMER_RADIUS);
-    initializeVariabels();
+    initializeVariables();
     clearTimeout(this.timerForTransofrmCircle);
 }
 
 function drawTimeCircleByContext(ctx, size, radius, onPause)
 {
-    if (this.intervalId)
+    if (drawTimeCircleTimeoutId)
     {
-        clearInterval(this.intervalId);
+        clearTimeout(drawTimeCircleTimeoutId);
     }
 
-    if (onPause)
+    if (!onPause)
+    {
+        _draw();
+        _drawByTimer();
+    }
+
+    function _draw ()
     {
         drawCircleWithMoving(this.ctx, this.size, radius, audio.duration, audio.currentTime);
     }
-    else
-    {
-        function func ()
-        {
-            drawCircleWithMoving(this.ctx, this.size, radius, audio.duration, audio.currentTime);
-        }
 
-        func();
-        this.intervalId = setInterval(() => {
-            func();
+    function _drawByTimer() {
+        drawTimeCircleTimeoutId = setTimeout(() => {
+            _draw();
+            _drawByTimer();
         }, 1000);
     }
 }
@@ -153,13 +162,22 @@ function setTrack(idOfTrack)
     document.getElementById("authorOfComposition").innerText = findTrackAuthorById(idOfCurrentTrack);
     setBackground(findBackgroundById(idOfCurrentTrack));
     drawTimeCircle();
+    drawTime();
+}
 
-    if (this.timeTimer)
+function drawTime()
+{
+    if (timeInPlayerSetTimeoutId)
     {
-        clearInterval(this.timeTimer);
+        clearTimeout(timeInPlayerSetTimeoutId);
     }
 
-    this.timeTimer = setInterval(() => {
+    const timer = document.getElementById("time-of-track");
+
+    _setTime();
+    _nextTick();
+
+    function _setTime() {
         const minutes = Math.floor(audio.currentTime / 60);
         const seconds = Math.ceil(audio.currentTime % 60);
 
@@ -171,17 +189,15 @@ function setTrack(idOfTrack)
             ? seconds
             : "0" + seconds;
 
-        document.getElementById("time-of-track").innerText = `${minutesStr}:${secondsStr}`;
-    }, 1000);
-}
+        timer.innerText = `${minutesStr}:${secondsStr}`;
+    }
 
-function initializeVariabels()
-{
-    this.timeAnimationExecution = 0;    
-    changingRadiusForTransofrmation = 0;
-    this.currentTimeOfTransformation = 0;
-    this.coefficentForWidthOfTimerTransformation = 0;
-    lineWidthOfTimerCircle = 5;
+    function _nextTick() {
+        timeInPlayerSetTimeoutId = setTimeout(() => {
+            _setTime();
+            _nextTick();
+        }, 1000);
+    }
 }
 
 function changingOpacityForPlayerIsFinished(oldElement, oldId, newId)

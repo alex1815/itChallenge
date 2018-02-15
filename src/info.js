@@ -1,5 +1,5 @@
 // we can thinks that this list had come from server
-// we propose that id is number. For string implementation, we should use Guid
+// we assume that id is number. For string implementation, we should use Guid
 const _listOfTracks = [
     {
         id: 0,
