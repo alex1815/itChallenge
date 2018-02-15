@@ -4,6 +4,8 @@ Names of track and paths should be according (in real app we will get these from
 
 As app very simple, we thinks that data from server always were gets before initialization.
 
+In more complex app we should add _ or use modificator of access in TypeScript.
+
 I didn't use any framework because it is overhead - we have just two simple component - player and listOfTrack. 
 If it part of more complex app, we can do some refactoring:
 
