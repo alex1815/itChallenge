@@ -1,8 +1,6 @@
 .flex {
     display: -webkit-box;
-    display: -moz-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     height: 100%;
     padding: 0;
@@ -10,7 +8,11 @@
 }
 
 .center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 
@@ -27,18 +29,22 @@
 
 .prev-button {
     position: absolute;
-    margin-left: calc(-160px + 10px);
+    margin-left: -300px;
 }
 
 .next-button {
     position: absolute;
-    margin-left: calc(160px - 10px);
+    margin-left: 300px;
 }
 
 .pause-play {
     position: absolute;
-    height: 20px;
-    margin-top: calc(160px - 10px);
+    margin-top: 300px;
+}
+
+.list-of-tracks-button {
+    position: absolute;
+    margin-top: -300px;
 }
 
 .timer-circle {
@@ -49,4 +55,26 @@
 
 .inner-block-with-author-time-name {
     max-width: 220px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    @supports (not (-ms-ime-align:auto))
+    and (not (-moz-appearance:none)) {
+        .next-button
+        {
+            margin-left: 150px;
+        }
+
+        .prev-button {
+            margin-left: -150px
+        }
+
+        .pause-play {
+            margin-top: 150px
+        }
+
+        .list-of-tracks-button {
+            margin-top: -150px;
+        }
+    }
 }

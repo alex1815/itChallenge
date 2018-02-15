@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    min-height: 100%;
 }
 body {
     margin: 0;
@@ -22,6 +23,7 @@ svg:hover {
     top: 0; 
     left: 0;
     z-index: -1;
+    background-repeat: no-repeat;
 }
 
 .background-image-default-color {

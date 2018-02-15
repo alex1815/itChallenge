@@ -1,4 +1,7 @@
 .list-of-tracks-block {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     max-width: 50%;
 }
@@ -44,11 +47,6 @@
 .selected-element {
     text-decoration: underline;
     color: 	#FAFAD2;
-}
-
-.list-of-tracks-button {
-    position: absolute;
-    margin-top: calc(-160px + 10px);
 }
 
 .time-of-track {
