@@ -1,32 +1,9 @@
-let audio;
-
 const TIMER_RADIUS = 180;
 const INNER_CIRCLE_RADIUS = 125;
 const TIME_OF_TIMER_TRANSFORMATION = 700;
 
-let idOfCurrentTrack;
 let lineWidthOfTimerCircle;
 let changingRadiusForTransformation;
-let drawTimeCircleTimeoutId;
-let timeInPlayerSetTimeoutId;
-
-function initial()
-{
-    audio = document.getElementById("audio");
-    const firstTrackId = getAllTracks()[0].id;
-
-    initializeVariables();
-    initListOfTracks(firstTrackId);
-
-    setTrack(firstTrackId);
-
-    drawCircle("canvasInnerCircle", INNER_CIRCLE_RADIUS);
-    drawCircle("canvasCircleUnderTimer", TIMER_RADIUS);
-
-    addListeners();
-
-    audio.autoplay = true;
-}
 
 function initializeVariables()
 {
@@ -143,26 +120,6 @@ function prepareCanvas(id, radius, width)
     element.width = width || size;
     element.height = size;
     return { ctx: element.getContext("2d"), size, element };
-}
-
-function setTrack(idOfTrack)
-{
-    if (idOfTrack === idOfCurrentTrack)
-    {
-        onPausePlay();
-        return;
-    }
-
-    const defaultTime = "00:00";
-    changeTrackInList(idOfTrack);
-    idOfCurrentTrack = idOfTrack;
-    audio.src = findTrackPathById(idOfCurrentTrack);
-    document.getElementById("name-of-composition").innerText = findTrackNameById(idOfCurrentTrack);
-    document.getElementById("time-of-track").innerText = defaultTime;
-    document.getElementById("authorOfComposition").innerText = findTrackAuthorById(idOfCurrentTrack);
-    setBackground(findBackgroundById(idOfCurrentTrack));
-    drawTimeCircle();
-    drawTime();
 }
 
 function drawTime()

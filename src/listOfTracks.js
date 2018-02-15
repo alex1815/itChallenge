@@ -1,5 +1,7 @@
 const SIZE_OF_TIMER_IN_LIST = 300;
 
+let timerInListOfTrackTimeoutId;
+
 function initListOfTracks(firstTrackId)
 {
     const tracks = getAllTracks();
@@ -55,17 +57,17 @@ function changeTrackInList(idOfTrack)
 
 function onOpenListOfTracks()
 {
+    setTimeForTimerInList(audio.duration, audio.currentTime);
+    timerInListOfTrackTimeoutId = setInterval( () => {
+            setTimeForTimerInList(audio.duration, audio.currentTime);
+        }, 1000);
+
     toggleMainScreen("playerControl", "tracksList");
     transformTimeCircle();
 }
 
 function onCloseListOfTracks()
 {
+    clearInterval(timerInListOfTrackTimeoutId);
     toggleMainScreen("tracksList", "playerControl");
 }
-
-( () => {
-    setInterval( () => {
-        setTimeForTimerInList(audio.duration, audio.currentTime)
-    }, 1000);
-})();

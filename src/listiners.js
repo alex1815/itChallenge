@@ -68,25 +68,6 @@ function onLongPressToPrevButton() {
     }
 }
 
-function toggleMainScreen(oldId, newId)
-{
-    const oldElement = document.getElementById(oldId);
-
-    if (oldId === "playerControl")
-    {
-        if (!changingOpacityForPlayerIsFinished(oldElement, oldId, newId))
-        {
-            return;
-        }
-    }
-
-    oldElement.style.display = "none";
-    oldElement.style.opacity = 1;
-
-    const newElem = document.getElementById(newId);
-    newElem.style.display = "block";
-}
-
 function onAudioEnd()
 {
     onNextTrack();
