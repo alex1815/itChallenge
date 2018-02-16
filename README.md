@@ -9,4 +9,4 @@ If it part of more complex app, we can do some refactoring:
 
 1. Move these in according class (player and listOfTrack)
 2. Encapsulate consts in class, expose audio and a few other const through a few public methods
-3. Use some framework like React for integration component as part of app
+3. Use a framework like React for integration component as part of app

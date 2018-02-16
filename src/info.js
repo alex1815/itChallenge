@@ -29,4 +29,18 @@ const _listOfTracks = [
         author: "Frédéric Chopin",
         background: "./assets/images/6284055448_e0d5c1af67_o.jpg",
     },
+    {
+        id: 4,
+        path:  "./assets/music/chopin-tarantelle-op43.mp3",
+        name: "Tarantelle, Op. 43",
+        author: "Frédéric Chopin",
+        background: "./assets/images/6284055448_e0d5c1af67_o.jpg",
+    },
+    {
+        id: 5,
+        path:  "./assets/music/chopin-tarantelle-op43.mp3",
+        name: "Tarantelle, Op. 43",
+        author: "Frédéric Chopin",
+        background: "./assets/images/6284055448_e0d5c1af67_o.jpg",
+    },
 ];

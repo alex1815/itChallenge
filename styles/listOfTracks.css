@@ -4,6 +4,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
     max-width: 50%;
+    overflow: hidden;
 }
 
 .list-of-tracks {
@@ -12,6 +13,9 @@
     border-color: grey;
     max-height: 70%;
     width: 100%;
+    overflow-y: scroll;
+    padding-left: 34px;
+    padding-right: 20px;
 }
 
 .name-and-author {
