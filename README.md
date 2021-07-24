@@ -13,4 +13,4 @@ If it part of more complex app, we can do some refactoring:
 2. Encapsulate consts in class, expose audio and a few other const through a few public methods
 3. Use a framework like React for integration component as part of app
 
-![Demo](assets/demo.mov)
+![Demo](assets/demo.gif)
